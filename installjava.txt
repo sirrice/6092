@@ -1,0 +1,117 @@
+= Installing Java and Eclipse
+Evan Jones <evanj@mit.edu>
+$Id$
+
+To write Java programs, you need two things: the Java Development Kit (JDK), and
+a source code editor. Please follow the directions in this document before the
+first class, so you can get started on the first assignment faster. If you run
+into difficulty, we can help you during the first class.
+
+The Java Development Kit contains the tools needed to compile and run Java
+programs. The source code editor lets you write programs, and has features to
+make this easier. For this course, you can use any tool you like, but we
+recommend Eclipse, and will demonstrate it during the first lecture.
+
+== Editors
+
+To write programs, you need a piece of software called an editor. They come in
+two flavors: simple source code editors, or complex integrated development
+environments. For this course, we recommend using the Eclipse Integrated
+Development Environment (IDE), but it is useful to be aware of the options that
+are available to you.
+
+=== Source Code Editors
+
+A source code editor is a program for editing text, like a word processor, but
+it has features which make it easier to read and write computer programs. An
+advantage of using a plain source code editor is that they are usually
+lightweight applications that are easy to learn and use. Additionally, the
+editors typically support many programming languages, so you can use the same
+tool for all your work. The disadvantage is that you will need to use the
+command line to run the compiler, and to organize larger projects.
+
+For Windows, some popular source code editors are
+http://www.scintilla.org/SciTE.html[SciTE],
+http://www.ultraedit.com/products/ultraedit.html[UltraEdit],
+http://www.zeusedit.com/[Zeus] (http://www.zeusedit.com/lite/index.html[old
+free version]), or http://www.jedit.org/[jEdit]. Mac users might want to look
+at http://macromates.com/[TextMate],
+http://www.codingmonkeys.de/subethaedit/[SubEthaEdit]
+(http://www.codingmonkeys.de/subethaedit/old.html[old free version]),
+http://www.barebones.com/products/TextWrangler/[TextWrangler], or
+http://www.jedit.org/[jEdit]. (_Note_: some of these are trial versions of
+software that you need to purchase).
+
+
+=== Integrated Development Environments (IDEs)
+
+Most professional Java developers use an integrated development environment
+(IDE), which combines a source code editor with other tools for software
+development. They make it easy to find and correct errors, and to accomplish
+tasks through a graphical interface, instead of the command line. In this class,
+we recommend using http://www.eclipse.org/[Eclipse]. Other popular IDEs for Java
+include http://netbeans.org/[NetBeans] and
+http://www.jetbrains.com/idea/[IntelliJ IDEA].
+
+
+== Windows
+=== Install the Sun Java 6 JDK
+
+You want to install the Java Standard Edition (SE) development kit (JDK). You
+can find this through Oracle's
+http://www.oracle.com/technetwork/java/javase/downloads/index.html[Java
+download site], but follow these directions for the direct link:
+
+. Go to the
+https://cds.sun.com/is-bin/INTERSHOP.enfinity/WFS/CDS-CDS_Developer-Site/en_US/-/USD/ViewProductDetail-Start?ProductRef=jdk-6u23-oth-JPR@CDS-CDS_Developer[Java SE Development Kit (JDK)]
+download page.
+. Under Platform, select Windows.
+. Check "I agree."
+. Click Continue.
+. Click the file name on the next page (something like jdk-6u23-windows-i586.exe).
+. Follow your browser's directions to download the file, then run the
+installer. Accept the default settings.
+
+
+=== Install Eclipse
+
+You want the Eclipse IDE for Java developers. You can find this on the
+http://www.eclipse.org/downloads/[Eclipse download site], but follow these
+directions for the direct link:
+
+. Download the
+http://mirrors.med.harvard.edu/eclipse/technology/epp/downloads/release/helios/SR1/eclipse-java-helios-SR1-win32.zip[Eclipse
+IDE for Java developers].
+. Open the zip file that you downloaded. It contains a single folder named
++eclipse+.
+. Move the +eclipse+ folder by dragging it somewhere you can find it again.
+The typical location is +C:\Program Files+, but the Desktop works as well. You
+may want to rename the folder to +Eclipse+.
+. Open the folder and start Eclipse by double clicking on +eclipse.exe+.
+. _Optional_: To make it easy to find in the future, create a shortcut from
++eclipse.exe+ your Desktop, and rename it +Eclipse+ (drag with the right
+mouse button to create a shortcut).
+
+
+== Mac OS X
+
+Mac OS X comes with the Java development tools. Run Software Update to ensure
+that you have the latest version installed (Apple Menu -> Software Update).
+
+=== Install Eclipse
+
+. Download the http://mirrors.med.harvard.edu/eclipse/technology/epp/downloads/release/helios/SR1/eclipse-java-helios-SR1-macosx-cocoa-x86_64.tar.gz[Eclipse
+IDE for Java developers].
+. Open the archive file that you downloaded (Safari may have expanded it
+automatically for you).
+. Drag and drop the +eclipse+ folder anywhere you want it (your Desktop may
+be a good place).
+. Run Eclipse by double clicking the +Eclipse+ application inside the +eclipse+
+folder.
+
+
+=== Linux
+
+If you are using Linux, you probably don't need our help to get Java and
+Eclipse running yourself. If you do need help, ask one of the instructors during
+the first lecture.

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+<title>6.092: Assignment 4</title>
+<style type="text/css">
+h1, h2, h3, h4 {
+    font-family: helvetica, arial, sans-serif;
+}
+
+// Styles for code snippet
+.S0 {
+	color: #808080;
+}
+.S2 {
+	font-family: serif;
+	color: #007F00;
+}
+.S5 {
+	font-weight: bold;
+	color: #00007F;
+}
+.S6 {
+	color: #7F007F;
+}
+.S10 {
+	font-weight: bold;
+	color: #000000;
+}
+.code {
+	font-family: sans-serif;
+	color: #000000;
+}
+</style>
+</head><body>
+
+<h1>6.092: Assignment 4</h1>
+
+<p>The Boston Race organizers need a new registration organization system,
+and it's up to you to build it.  The organizers want runners to register at most once for the race
+and enter the runners' results once the race ends.  Additionally, the organizers want to announce the 
+fastest and slowest runners at the end of the race</p>
+
+<h2>Problem</h2>
+<p>We provide two classes, <code>Runner</code> and <code>Race</code>, that provide the functionality for the registration system. You must implement the missing methods to make these classes work.</p>
+
+<h3>Step One: Implement Runner</h3>
+
+<p>First we need a class to model runners. Start by creating a class called <code>Runner</code>. Copy and paste the skeleton below. This class defines methods to get the name of a runner, find out if s/he's registered, and assign the race result. However, the skeleton that we provide is missing the implementations of the methods. Fill in the body of the methods with the appropriate code. The <code>main</code> method tests the methods. When you run the program, the output should be:</p>
+
+<pre>
+Name (should be Bob): Bob
+isRegistered (should be false): false
+isRegistered (should be true): true
+isRegistered (should be true): true
+result (should be 0.0): 0.0
+result (should be 10.0): 10.0
+</pre>
+
+<p><em>Hint:</em> Look at the <code>main</code> method to see how the methods are used, then fill in the code for each method.</p>
+
+<h3>Step Two: Implement Race</h3>
+
+<p>Next we need to build the class that will represent a race, and manage a set of participant runners. A race can only allow a maximum number of participants before runners that try to register are rejected.</p>
+
+<p>Create a class called <code>Race</code>. Copy and paste the skeleton below. We provide a <code>main</code> method that creates a 4 person race, adds some runners, runs the race, and prints some statistics. However, almost all the methods and fields are missing. You will need to define and implement the missing methods. Read the <code>main</code> method and look at the compile errors to figure out what methods are missing.</p>
+
+<h4>Notes</h4>
+<ul>
+<!--<li>Some methods will need to be <em>static</em> methods, and some need to be <em>instance</em> methods.</li>-->
+<li>Be careful when comparing Strings objects. Use <code>string1.equals(string2)</code> for comparing the contents of <code>string1</code> and <code>string2</code>.</li>
+<li>You should get a small part working at a time. Start by commenting the entire <code>main</code> method, then uncomment it line by line. Run the program, get the first lines working, then uncomment the next line, get that working, etc. You can comment a block of code in Eclipse by selecting the code, then choosing Source → Toggle Comment. Do the same again to uncomment it.</li>
+<li>You must <em>not</em> modify the <code>main</code> method.</li>
+</ul>
+
+<p>The output when you run this program should be similar to the following:</p>
+
+<pre>
+The annual MIT Turkey Trot
+Maximum 4 participants
+
+runner0 registered? (should be true): true
+runner1 registered? (should be true): true
+runner2 registered? (should be true): true
+runner3 registered? (should be true): true
+runner4 registered? (should be false): false
+
+Participants of The annual MIT Turkey Trot:
+runner0
+runner1
+runner2
+runner3
+
+Results of The annual MIT Turkey Trot:
+runner0	60.0
+runner1	48.0
+runner2	29.0
+runner3	47.0
+
+fastestRunner's name (should be runner2): runner2
+fastestRunner's result (should be 29.0): 29.0
+
+average time (should be 46.0): 46.0
+</pre>
+
+<h2>Submission Instructions</h2>
+
+<p>
+Submit both files (<code>Runner.java</code> and <code>Race.java</code>) via Stellar.
+</p>
+
+<p>Good luck!</p>
+
+<h2>Runner.java</h2>
+<pre style='color:#000000;background:#ffffff;'><span style='color:#7f0055; font-weight:bold; '>public</span> <span style='color:#7f0055; font-weight:bold; '>class</span> Runner {
+    <span style='color:#7f0055; font-weight:bold; '>String</span> name;
+    <span style='color:#7f0055; font-weight:bold; '>double</span> result = 0;        <span style='color:#3f7f59; '>// race result</span>
+    <span style='color:#7f0055; font-weight:bold; '>boolean</span> registered = false;
+    
+    <span style='color:#3f7f59; '>// creates a new Runner instance</span>
+    Runner(<span style='color:#7f0055; font-weight:bold; '>String</span> runnerName) {
+        <span style='color:#3f7f59; '>// implement this method</span>
+    }
+    
+    <span style='color:#3f7f59; '>// register the runner in the race</span>
+    <span style='color:#7f0055; font-weight:bold; '>public</span> <span style='color:#7f0055; font-weight:bold; '>void</span> register() {
+        <span style='color:#3f7f59; '>// implement this method</span>
+    }
+    
+    <span style='color:#3f7f59; '>// set the runner's race time</span>
+    <span style='color:#7f0055; font-weight:bold; '>public</span> <span style='color:#7f0055; font-weight:bold; '>void</span> setResult(<span style='color:#7f0055; font-weight:bold; '>double</span> res) {
+        <span style='color:#3f7f59; '>// implement this method</span>
+    }
+    
+    <span style='color:#3f7f59; '>// returns Runner's name</span>
+    <span style='color:#7f0055; font-weight:bold; '>public</span> <span style='color:#7f0055; font-weight:bold; '>String</span> getName() {
+        <span style='color:#3f7f59; '>// implement this method</span>
+    }
+    
+    <span style='color:#3f7f59; '>// get runner's race result</span>
+    <span style='color:#7f0055; font-weight:bold; '>public</span> <span style='color:#7f0055; font-weight:bold; '>double</span> getResult() {
+        <span style='color:#3f7f59; '>// implement this method</span>
+    }
+    
+    <span style='color:#3f7f59; '>// returns if the runner has registered for a race</span>
+    <span style='color:#7f0055; font-weight:bold; '>public</span> <span style='color:#7f0055; font-weight:bold; '>boolean</span> isRegistered() {
+        <span style='color:#3f7f59; '>// implement this method</span>
+    }
+    
+    <span style='color:#7f0055; font-weight:bold; '>public</span> <span style='color:#7f0055; font-weight:bold; '>static</span> <span style='color:#7f0055; font-weight:bold; '>void</span> main(<span style='color:#7f0055; font-weight:bold; '>String</span>[] args) {
+        <span style='color:#3f7f59; '>// small test for Runner</span>
+        Runner bob = <span style='color:#7f0055; font-weight:bold; '>new</span> Runner(<span style='color:#2a00ff; '>"Bob"</span>);
+        
+        <span style='color:#7f0055; font-weight:bold; '>System</span>.out.println(<span style='color:#2a00ff; '>"Name (should be Bob): "</span> + bob.getName());
+        <span style='color:#7f0055; font-weight:bold; '>System</span>.out.println(<span style='color:#2a00ff; '>"isRegistered (should be false): "</span> + bob.isRegistered());
+        bob.register();        
+        <span style='color:#7f0055; font-weight:bold; '>System</span>.out.println(<span style='color:#2a00ff; '>"isRegistered (should be true): "</span> + bob.isRegistered());        
+        bob.register();        
+        <span style='color:#7f0055; font-weight:bold; '>System</span>.out.println(<span style='color:#2a00ff; '>"isRegistered (should be true): "</span> + bob.isRegistered());
+        <span style='color:#7f0055; font-weight:bold; '>System</span>.out.println(<span style='color:#2a00ff; '>"result (should be 0.0): "</span> + bob.getResult());
+        bob.setResult(10.0);
+        <span style='color:#7f0055; font-weight:bold; '>System</span>.out.println(<span style='color:#2a00ff; '>"result (should be 10.0): "</span> + bob.getResult());
+    }
+
+}
+</pre>
+
+<h2>Race.java</h2>
+
+<pre style='color:#000000;background:#ffffff;'><span style='color:#7f0055; font-weight:bold; '>import</span><span style='color:#7f0055; '> java</span><span style='color:#7f0055; '>.</span><span style='color:#7f0055; '>util</span><span style='color:#7f0055; '>.</span><span style='color:#7f0055; '>Random</span><span style='color:#7f0055; '>;</span>
+
+<span style='color:#7f0055; font-weight:bold; '>public</span> <span style='color:#7f0055; font-weight:bold; '>class</span> Race {
+    
+    Runner[] myrunners;
+    <span style='color:#3f7f59; '>// Add the missing fields for this class</span>
+    
+            
+    <span style='color:#3f7f59; '>// return the Runner object of the fastest runner</span>
+    <span style='color:#3f7f59; '>// note: this doesn't make sense if runRace has not been called</span>
+    <span style='color:#3f7f59; '>// note: make sure this works even if less than max number of participants ran the race</span>
+    <span style='color:#3f7f59; '>//         e.g., 4 runners registered for a 10 person race</span>
+    <span style='color:#7f0055; font-weight:bold; '>public</span> Runner getFastestRunner() {
+        <span style='color:#3f7f59; '>// implement this method</span>
+        <span style='color:#7f0055; font-weight:bold; '>return</span> <span style='color:#7f0055; font-weight:bold; '>null</span>;
+    }
+    
+    <span style='color:#3f7f59; '>// Simulate a race and set the results for each participant</span>
+    <span style='color:#7f0055; font-weight:bold; '>public</span> <span style='color:#7f0055; font-weight:bold; '>void</span> runRace() {
+        <span style='color:#7f0055; font-weight:bold; '>Random</span> rand = <span style='color:#7f0055; font-weight:bold; '>new</span> <span style='color:#7f0055; font-weight:bold; '>Random</span>(0);
+        <span style='color:#7f0055; font-weight:bold; '>for</span> (Runner r : myrunners) {
+        <span style='color:#7f0055; font-weight:bold; '>for</span> (<span style='color:#7f0055; font-weight:bold; '>int</span> i = 0; i &lt; myrunners.length; i++) {
+            <span style='color:#7f0055; font-weight:bold; '>if</span> (myrunners[i] != <span style='color:#7f0055; font-weight:bold; '>null</span>)
+                myrunners[i].setResult(rand.nextInt(100));
+        }
+    }
+    
+    <span style='color:#3f7f59; '>// Add the missing methods for this class</span>
+    
+    
+    
+    <span style='color:#7f0055; font-weight:bold; '>public</span> <span style='color:#7f0055; font-weight:bold; '>static</span> <span style='color:#7f0055; font-weight:bold; '>void</span> main(<span style='color:#7f0055; font-weight:bold; '>String</span>[] args) {
+        <span style='color:#3f7f59; '>// create a race with a maximum of 4 participants</span>
+        Race race = <span style='color:#7f0055; font-weight:bold; '>new</span> Race(<span style='color:#2a00ff; '>"The annual MIT Turkey Trot"</span>, 4);
+        
+        <span style='color:#3f7f59; '>// print race information</span>
+        race.printInformation();
+        <span style='color:#7f0055; font-weight:bold; '>System</span>.out.println();
+        
+        <span style='color:#3f7f59; '>// create an array of runners</span>
+        Runner[] runners = {<span style='color:#7f0055; font-weight:bold; '>new</span> Runner(<span style='color:#2a00ff; '>"runner0"</span>),
+                            <span style='color:#7f0055; font-weight:bold; '>new</span> Runner(<span style='color:#2a00ff; '>"runner1"</span>),
+                            <span style='color:#7f0055; font-weight:bold; '>new</span> Runner(<span style='color:#2a00ff; '>"runner2"</span>),
+                            <span style='color:#7f0055; font-weight:bold; '>new</span> Runner(<span style='color:#2a00ff; '>"runner3"</span>),
+                            <span style='color:#7f0055; font-weight:bold; '>new</span> Runner(<span style='color:#2a00ff; '>"runner4"</span>)};
+                            
+        <span style='color:#3f7f59; '>// try to register the runners in the race</span>
+        <span style='color:#7f0055; font-weight:bold; '>for</span> (<span style='color:#7f0055; font-weight:bold; '>int</span> i = 0; i &lt; runners.length; i++) {
+            race.addRunner(runners[i]);
+        }
+        
+        
+        <span style='color:#7f0055; font-weight:bold; '>System</span>.out.println(<span style='color:#2a00ff; '>"runner0 registered? (should be true): "</span> + runners[0].isRegistered());
+        <span style='color:#7f0055; font-weight:bold; '>System</span>.out.println(<span style='color:#2a00ff; '>"runner1 registered? (should be true): "</span> + runners[1].isRegistered());
+        <span style='color:#7f0055; font-weight:bold; '>System</span>.out.println(<span style='color:#2a00ff; '>"runner2 registered? (should be true): "</span> + runners[2].isRegistered());
+        <span style='color:#7f0055; font-weight:bold; '>System</span>.out.println(<span style='color:#2a00ff; '>"runner3 registered? (should be true): "</span> + runners[3].isRegistered());
+        <span style='color:#7f0055; font-weight:bold; '>System</span>.out.println(<span style='color:#2a00ff; '>"runner4 registered? (should be false): "</span> + runners[4].isRegistered());
+        <span style='color:#7f0055; font-weight:bold; '>System</span>.out.println();
+        
+        
+        <span style='color:#7f0055; font-weight:bold; '>System</span>.out.println(<span style='color:#2a00ff; '>"Participants of The annual MIT Turkey Trot:"</span>);
+        race.printParticipants();
+        <span style='color:#7f0055; font-weight:bold; '>System</span>.out.println();
+        
+        <span style='color:#3f7f59; '>// set the results for each participant</span>
+        race.runRace();
+        
+        <span style='color:#7f0055; font-weight:bold; '>System</span>.out.println(<span style='color:#2a00ff; '>"Results of The annual MIT Turkey Trot:"</span>);
+        race.printResults();
+        <span style='color:#7f0055; font-weight:bold; '>System</span>.out.println();
+        
+        Runner fastestRunner = race.getFastestRunner();
+        <span style='color:#7f0055; font-weight:bold; '>System</span>.out.println(<span style='color:#2a00ff; '>"fastestRunner's name (should be runner2): "</span> + fastestRunner.getName());
+        <span style='color:#7f0055; font-weight:bold; '>System</span>.out.println(<span style='color:#2a00ff; '>"fastestRunner's result (should be 29.0): "</span> + fastestRunner.getResult());
+        <span style='color:#7f0055; font-weight:bold; '>System</span>.out.println();
+        
+        <span style='color:#7f0055; font-weight:bold; '>double</span> avgResult = race.getAverageResult();
+        <span style='color:#7f0055; font-weight:bold; '>System</span>.out.println(<span style='color:#2a00ff; '>"average time (should be 46.0): "</span> + avgResult);
+    }
+
+}
+</pre>
+
+
+</body></html>

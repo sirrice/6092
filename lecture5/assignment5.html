@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+  PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN'
+  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>6.092: Assignment 5</title>
+<style type="text/css">
+h1, h2 {
+    font-family: helvetica, arial, sans-serif;
+}
+
+// Styles for code snippet
+.S0 {
+	color: #808080;
+}
+.S2 {
+	font-family: serif;
+	color: #007F00;
+}
+.S3 {
+	font-family: serif;
+	color: #3F703F;
+}
+.S4 {
+	color: #007F7F;
+}
+.S5 {
+	font-weight: bold;
+	color: #00007F;
+}
+.S6 {
+	color: #7F007F;
+}
+.S10 {
+	font-weight: bold;
+	color: #000000;
+}
+
+.code {
+	font-family: sans-serif;
+	color: #000000;
+}
+</style>
+</head>
+<body>
+
+<h1>6.092: Assignment 5</h1>
+
+<p>In the last assignment you learned how to create your own simple objects. One of the  advantages of building software using objects is that it makes it relatively easy to use software components that other people have built. In this assignment, you will use the Java's built-in graphics and containers, combined with a simple framework that we provide.</p>
+
+
+<h2>Requirements (in brief)</h2>
+
+<ul>
+<li>Add three different shapes to the initial window we provide.</li>
+<li>Add three instances of the <code>BouncingBox</code> class to your window, moving in different directions. Use an <code>ArrayList</code> to hold them.</li>
+</ul>
+
+
+<h2>Setup</h2>
+
+<ol>
+<li>(Optional) Create a new project in Eclipse, with whatever name you want.</li>
+<li>Create three classes: <code>SimpleDraw</code>, <code>BouncingBox</code>, and <code>DrawGraphics</code>. Copy and paste the code for these classes from below.</li>
+<li>Run the example program. If Eclipse gives you trouble, open <code>SimpleDraw</code> and run that, as it contains the <code>main</code> method for the program. You should see a window that looks like the following:
+<p style="text-align: center;"><img style="border: solid thin black;" src="initial.png" width="300" height="322" alt="Initial Graphics Output"/></p></li>
+</ol>
+
+
+<h2>Part One: Drawing Graphics</h2>
+
+<p>Open the <code>DrawGraphics</code> class. The <code>draw</code> method is what draws the contents of the window. Currently, there is a line and a square with a border around it. Feel free to remove these, if you want. Add at least three <em>different</em> shapes to the window. Read the API documentation for the <code><a href="http://java.sun.com/javase/6/docs/api/java/awt/Graphics.html">java.awt.Graphics</a></code> class<!--, or the <code><a href="http://java.sun.com/javase/6/docs/api/java/awt/Graphics2D.html">java.awt.Graphics2D</a></code> class--> to find what methods are provided. You can draw rectangles, arcs, lines, text, ovals, polygons, and, if you want to do some extra work, images. Be creative!</p>
+
+<p><em>Note:</em> You should only modify the <code>DrawGraphics</code> class for this step. The other classes contain a bunch of code required to create a window in Java that you do not need to change or understand.</p>
+
+
+<h2>Part Two: Containers and Animation</h2>
+
+<p>The <code>DrawGraphics</code> class supports animation. The <code>draw</code> method gets called 20 times a second, in order to draw each individual frame. The <code>BouncingBox</code> class also includes animation support. To get the box to move, call <code>setMovementVector</code> method from the <code>DrawGraphics</code> constructor, providing an x and y offset. For example, the value (1, 0) moves the box to the right slowly, while (0, -2) will move it up faster. You only need to call this method <em>once</em> to keep it moving in that direction. In other words, don't call <code>setMovementVector</code> from the <code>draw</code> method, call it from the <em>constructor</em>.</p>
+
+<p>Add at least three boxes to your window, moving in different directions. To do this, put three <code>BouncingBox</code> instances in an <a href="http://java.sun.com/javase/6/docs/api/java/util/ArrayList.html"><code>ArrayList</code></a>, as part of the <code>DrawGraphics</code> constructor. Then, call the <code>draw</code> method on each of the boxes from <code>DrawGraphics.draw</code>, using a loop.</p>
+
+<p><em>Optional:</em> If you want to experiment,  create your own animated object. Copy <code>BouncingBox</code> as a starting point, then edit the code in its <code>draw</code> method. You could create something with more complicated movement, and/or something that looks better than what I created in five minutes.</p>
+
+
+<h2>Submission Instructions</h2>
+
+<p>Submit your <tt>DrawGraphics.java</tt> file via Stellar.</p>
+
+
+<h2>SimpleDraw.java</h2>
+
+<p class="code">
+<span class="S5">import</span><span class="S0"> </span>java<span class="S10">.</span>awt<span class="S10">.</span>Color<span class="S10">;</span><br />
+<span class="S5">import</span><span class="S0"> </span>java<span class="S10">.</span>awt<span class="S10">.</span>Dimension<span class="S10">;</span><br />
+<span class="S5">import</span><span class="S0"> </span>java<span class="S10">.</span>awt<span class="S10">.</span>Graphics<span class="S10">;</span><br />
+<span class="S5">import</span><span class="S0"> </span>java<span class="S10">.</span>awt<span class="S10">.</span>Graphics2D<span class="S10">;</span><br />
+<span class="S5">import</span><span class="S0"> </span>java<span class="S10">.</span>awt<span class="S10">.</span>RenderingHints<span class="S10">;</span><br />
+<span class="S5">import</span><span class="S0"> </span>java<span class="S10">.</span>awt<span class="S10">.</span>event<span class="S10">.</span>WindowAdapter<span class="S10">;</span><br />
+<span class="S5">import</span><span class="S0"> </span>java<span class="S10">.</span>awt<span class="S10">.</span>event<span class="S10">.</span>WindowEvent<span class="S10">;</span><br />
+<br />
+<span class="S5">import</span><span class="S0"> </span>javax<span class="S10">.</span>swing<span class="S10">.</span>JFrame<span class="S10">;</span><br />
+<span class="S5">import</span><span class="S0"> </span>javax<span class="S10">.</span>swing<span class="S10">.</span>JPanel<span class="S10">;</span><br />
+<br />
+<span class="S3">/** Displays a window and delegates drawing to DrawGraphics. */</span><br />
+<span class="S5">public</span><span class="S0"> </span><span class="S5">class</span><span class="S0"> </span>SimpleDraw<span class="S0"> </span><span class="S5">extends</span><span class="S0"> </span>JPanel<span class="S0"> </span><span class="S5">implements</span><span class="S0"> </span>Runnable<span class="S0"> </span><span class="S10">{</span><span class="S0"> &nbsp;&nbsp;&nbsp;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">private</span><span class="S0"> </span><span class="S5">static</span><span class="S0"> </span><span class="S5">final</span><span class="S0"> </span><span class="S5">long</span><span class="S0"> </span>serialVersionUID<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S10">-</span><span class="S4">7469734580960165754L</span><span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">private</span><span class="S0"> </span><span class="S5">boolean</span><span class="S0"> </span>animate<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span>true<span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">private</span><span class="S0"> </span><span class="S5">final</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>FRAME_DELAY<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">50</span><span class="S10">;</span><span class="S0"> </span><span class="S2">// 50 ms = 20 FPS</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">static</span><span class="S0"> </span><span class="S5">final</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>WIDTH<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">300</span><span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">static</span><span class="S0"> </span><span class="S5">final</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>HEIGHT<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">300</span><span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">private</span><span class="S0"> </span>DrawGraphics<span class="S0"> </span>draw<span class="S10">;</span><br />
+<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span>SimpleDraw<span class="S10">(</span>DrawGraphics<span class="S0"> </span>drawer<span class="S10">)</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">this</span><span class="S10">.</span>draw<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span>drawer<span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><br />
+<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S3">/** Paint callback from Swing. Draw graphics using g. */</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>paintComponent<span class="S10">(</span>Graphics<span class="S0"> </span>g<span class="S10">)</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">super</span><span class="S10">.</span>paintComponent<span class="S10">(</span>g<span class="S10">);</span><br />
+<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Enable anti-aliasing for better looking graphics </span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Graphics2D<span class="S0"> </span>g2<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S10">(</span>Graphics2D<span class="S10">)</span><span class="S0"> </span>g<span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>g2<span class="S10">.</span>setRenderingHint<span class="S10">(</span>RenderingHints<span class="S10">.</span>KEY_ANTIALIASING<span class="S10">,</span><span class="S0"> </span>RenderingHints<span class="S10">.</span>VALUE_ANTIALIAS_ON<span class="S10">);</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>draw<span class="S10">.</span>draw<span class="S10">(</span>g2<span class="S10">);</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><br />
+<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S3">/** Enables periodic repaint calls. */</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">synchronized</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>start<span class="S10">()</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>animate<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span>true<span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><br />
+<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S3">/** Pauses animation. */</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">synchronized</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>stop<span class="S10">()</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>animate<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span>false<span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><br />
+<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">private</span><span class="S0"> </span><span class="S5">synchronized</span><span class="S0"> </span><span class="S5">boolean</span><span class="S0"> </span>animationEnabled<span class="S10">()</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">return</span><span class="S0"> </span>animate<span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><br />
+<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>run<span class="S10">()</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">while</span><span class="S0"> </span><span class="S10">(</span>true<span class="S10">)</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">if</span><span class="S0"> </span><span class="S10">(</span>animationEnabled<span class="S10">())</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>repaint<span class="S10">();</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><br />
+<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">try</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Thread<span class="S10">.</span>sleep<span class="S10">(</span>FRAME_DELAY<span class="S10">);</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><span class="S0"> </span><span class="S5">catch</span><span class="S0"> </span><span class="S10">(</span>InterruptedException<span class="S0"> </span>e<span class="S10">)</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">throw</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span>RuntimeException<span class="S10">(</span>e<span class="S10">);</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><br />
+<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">static</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>main<span class="S10">(</span>String<span class="S0"> </span>args<span class="S10">[])</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">final</span><span class="S0"> </span>SimpleDraw<span class="S0"> </span>content<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span>SimpleDraw<span class="S10">(</span><span class="S5">new</span><span class="S0"> </span>DrawGraphics<span class="S10">());</span><br />
+<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>JFrame<span class="S0"> </span>frame<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span>JFrame<span class="S10">(</span><span class="S6">"Graphics!"</span><span class="S10">);</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Color<span class="S0"> </span>bgColor<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span>Color<span class="S10">.</span>white<span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>frame<span class="S10">.</span>setBackground<span class="S10">(</span>bgColor<span class="S10">);</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>content<span class="S10">.</span>setBackground<span class="S10">(</span>bgColor<span class="S10">);</span><br />
+<span class="S2">// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content.setSize(WIDTH, HEIGHT);</span><br />
+<span class="S2">// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content.setMinimumSize(new Dimension(WIDTH, HEIGHT));</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>content<span class="S10">.</span>setPreferredSize<span class="S10">(</span><span class="S5">new</span><span class="S0"> </span>Dimension<span class="S10">(</span>WIDTH<span class="S10">,</span><span class="S0"> </span>HEIGHT<span class="S10">));</span><br />
+<span class="S2">// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;frame.setSize(WIDTH, HEIGHT);</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>frame<span class="S10">.</span>setContentPane<span class="S10">(</span>content<span class="S10">);</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>frame<span class="S10">.</span>setResizable<span class="S10">(</span>false<span class="S10">);</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>frame<span class="S10">.</span>pack<span class="S10">();</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>frame<span class="S10">.</span>addWindowListener<span class="S10">(</span><span class="S5">new</span><span class="S0"> </span>WindowAdapter<span class="S10">()</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>windowClosing<span class="S10">(</span>WindowEvent<span class="S0"> </span>e<span class="S10">)</span><span class="S0"> </span><span class="S10">{</span><span class="S0"> </span>System<span class="S10">.</span>exit<span class="S10">(</span><span class="S4">0</span><span class="S10">);</span><span class="S0"> </span><span class="S10">}</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>windowDeiconified<span class="S10">(</span>WindowEvent<span class="S0"> </span>e<span class="S10">)</span><span class="S0"> </span><span class="S10">{</span><span class="S0"> </span>content<span class="S10">.</span>start<span class="S10">();</span><span class="S0"> </span><span class="S10">}</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>windowIconified<span class="S10">(</span>WindowEvent<span class="S0"> </span>e<span class="S10">)</span><span class="S0"> </span><span class="S10">{</span><span class="S0"> </span>content<span class="S10">.</span>stop<span class="S10">();</span><span class="S0"> </span><span class="S10">}</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">});</span><br />
+<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">new</span><span class="S0"> </span>Thread<span class="S10">(</span>content<span class="S10">).</span>start<span class="S10">();</span><br />
+<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>frame<span class="S10">.</span>setVisible<span class="S10">(</span>true<span class="S10">);</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><br />
+<span class="S10">}</span>
+</p>
+
+<h2>BouncingBox.java</h2>
+
+<p class="code">
+<span class="S5">import</span><span class="S0"> </span>java<span class="S10">.</span>awt<span class="S10">.</span>BasicStroke<span class="S10">;</span><br />
+<span class="S5">import</span><span class="S0"> </span>java<span class="S10">.</span>awt<span class="S10">.</span>Color<span class="S10">;</span><br />
+<span class="S5">import</span><span class="S0"> </span>java<span class="S10">.</span>awt<span class="S10">.</span>Graphics<span class="S10">;</span><br />
+<span class="S5">import</span><span class="S0"> </span>java<span class="S10">.</span>awt<span class="S10">.</span>Graphics2D<span class="S10">;</span><br />
+<br />
+<span class="S5">public</span><span class="S0"> </span><span class="S5">class</span><span class="S0"> </span>BouncingBox<span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">int</span><span class="S0"> </span>x<span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">int</span><span class="S0"> </span>y<span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span>Color<span class="S0"> </span>color<span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">int</span><span class="S0"> </span>xDirection<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">int</span><span class="S0"> </span>yDirection<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">final</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>SIZE<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">20</span><span class="S10">;</span><br />
+<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S3">/**</span><br />
+<span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Initialize a new box with its center located at (startX, startY), filled</span><br />
+<span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* with startColor.</span><br />
+<span class="S3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span>BouncingBox<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>startX<span class="S10">,</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>startY<span class="S10">,</span><span class="S0"> </span>Color<span class="S0"> </span>startColor<span class="S10">)</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>x<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span>startX<span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>y<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span>startY<span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>color<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span>startColor<span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><br />
+<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S3">/** Draws the box at its current position on to surface. */</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>draw<span class="S10">(</span>Graphics<span class="S0"> </span>surface<span class="S10">)</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Draw the object</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>surface<span class="S10">.</span>setColor<span class="S10">(</span>color<span class="S10">);</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>surface<span class="S10">.</span>fillRect<span class="S10">(</span>x<span class="S0"> </span><span class="S10">-</span><span class="S0"> </span>SIZE<span class="S10">/</span><span class="S4">2</span><span class="S10">,</span><span class="S0"> </span>y<span class="S0"> </span><span class="S10">-</span><span class="S0"> </span>SIZE<span class="S10">/</span><span class="S4">2</span><span class="S10">,</span><span class="S0"> </span>SIZE<span class="S10">,</span><span class="S0"> </span>SIZE<span class="S10">);</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>surface<span class="S10">.</span>setColor<span class="S10">(</span>Color<span class="S10">.</span>BLACK<span class="S10">);</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">((</span>Graphics2D<span class="S10">)</span><span class="S0"> </span>surface<span class="S10">).</span>setStroke<span class="S10">(</span><span class="S5">new</span><span class="S0"> </span>BasicStroke<span class="S10">(</span><span class="S4">3.0f</span><span class="S10">));</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>surface<span class="S10">.</span>drawRect<span class="S10">(</span>x<span class="S0"> </span><span class="S10">-</span><span class="S0"> </span>SIZE<span class="S10">/</span><span class="S4">2</span><span class="S10">,</span><span class="S0"> </span>y<span class="S0"> </span><span class="S10">-</span><span class="S0"> </span>SIZE<span class="S10">/</span><span class="S4">2</span><span class="S10">,</span><span class="S0"> </span>SIZE<span class="S10">,</span><span class="S0"> </span>SIZE<span class="S10">);</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// Move the center of the object each time we draw it</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>x<span class="S0"> </span><span class="S10">+=</span><span class="S0"> </span>xDirection<span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>y<span class="S0"> </span><span class="S10">+=</span><span class="S0"> </span>yDirection<span class="S10">;</span><br />
+<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// If we have hit the edge and are moving in the wrong direction, reverse direction</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// We check the direction because if a box is placed near the wall, we would get "stuck"</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S2">// rather than moving in the right direction</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">if</span><span class="S0"> </span><span class="S10">((</span>x<span class="S0"> </span><span class="S10">-</span><span class="S0"> </span>SIZE<span class="S10">/</span><span class="S4">2</span><span class="S0"> </span><span class="S10">&lt;=</span><span class="S0"> </span><span class="S4">0</span><span class="S0"> </span><span class="S10">&amp;&amp;</span><span class="S0"> </span>xDirection<span class="S0"> </span><span class="S10">&lt;</span><span class="S0"> </span><span class="S4">0</span><span class="S10">)</span><span class="S0"> </span><span class="S10">||</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">(</span>x<span class="S0"> </span><span class="S10">+</span><span class="S0"> </span>SIZE<span class="S10">/</span><span class="S4">2</span><span class="S0"> </span><span class="S10">&gt;=</span><span class="S0"> </span>SimpleDraw<span class="S10">.</span>WIDTH<span class="S0"> </span><span class="S10">&amp;&amp;</span><span class="S0"> </span>xDirection<span class="S0"> </span><span class="S10">&gt;</span><span class="S0"> </span><span class="S4">0</span><span class="S10">))</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>xDirection<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S10">-</span>xDirection<span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">if</span><span class="S0"> </span><span class="S10">((</span>y<span class="S0"> </span><span class="S10">-</span><span class="S0"> </span>SIZE<span class="S10">/</span><span class="S4">2</span><span class="S0"> </span><span class="S10">&lt;=</span><span class="S0"> </span><span class="S4">0</span><span class="S0"> </span><span class="S10">&amp;&amp;</span><span class="S0"> </span>yDirection<span class="S0"> </span><span class="S10">&lt;</span><span class="S0"> </span><span class="S4">0</span><span class="S10">)</span><span class="S0"> </span><span class="S10">||</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">(</span>y<span class="S0"> </span><span class="S10">+</span><span class="S0"> </span>SIZE<span class="S10">/</span><span class="S4">2</span><span class="S0"> </span><span class="S10">&gt;=</span><span class="S0"> </span>SimpleDraw<span class="S10">.</span>HEIGHT<span class="S0"> </span><span class="S10">&amp;&amp;</span><span class="S0"> </span>yDirection<span class="S0"> </span><span class="S10">&gt;</span><span class="S0"> </span><span class="S4">0</span><span class="S10">))</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>yDirection<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S10">-</span>yDirection<span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><br />
+<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>setMovementVector<span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>xIncrement<span class="S10">,</span><span class="S0"> </span><span class="S5">int</span><span class="S0"> </span>yIncrement<span class="S10">)</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>xDirection<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span>xIncrement<span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>yDirection<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span>yIncrement<span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><br />
+<span class="S10">}</span>
+</p>
+
+<h2>DrawGraphics</h2>
+
+<p class="code">
+<span class="S5">import</span><span class="S0"> </span>java<span class="S10">.</span>awt<span class="S10">.</span>Color<span class="S10">;</span><br />
+<span class="S5">import</span><span class="S0"> </span>java<span class="S10">.</span>awt<span class="S10">.</span>Graphics<span class="S10">;</span><br />
+<br />
+<span class="S5">public</span><span class="S0"> </span><span class="S5">class</span><span class="S0"> </span>DrawGraphics<span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span>BouncingBox<span class="S0"> </span>box<span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S3">/** Initializes this class for drawing. */</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span>DrawGraphics<span class="S10">()</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>box<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S5">new</span><span class="S0"> </span>BouncingBox<span class="S10">(</span><span class="S4">200</span><span class="S10">,</span><span class="S0"> </span><span class="S4">50</span><span class="S10">,</span><span class="S0"> </span>Color<span class="S10">.</span>RED<span class="S10">);</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><br />
+<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S3">/** Draw
+the contents of the window on surface. Called 20 times per second. */</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>draw<span class="S10">(</span>Graphics<span class="S0"> </span>surface<span class="S10">)</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>surface<span class="S10">.</span>drawLine<span class="S10">(</span><span class="S4">50</span><span class="S10">,</span><span class="S0"> </span><span class="S4">50</span><span class="S10">,</span><span class="S0"> </span><span class="S4">250</span><span class="S10">,</span><span class="S0"> </span><span class="S4">250</span><span class="S10">);</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>box<span class="S10">.</span>draw<span class="S10">(</span>surface<span class="S10">);</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><br />
+<span class="S10">}</span>
+</p>
+
+</body></html>

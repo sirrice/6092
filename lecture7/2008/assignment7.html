@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <title>6.092 Assignment 7: Refining YourFace</title>
+ <link rel="stylesheet" type="text/css" href="../style.css" />
+</head>
+<body id="a7" class="assignment">
+
+<div id="container">
+<div id="main">
+
+<div class="content">
+<h1>6.092 Assignment 7: Refining YourFace</h1>
+
+<p class="summary">Your assignment is to use your current knowledge
+about packages, Collections, and abstract classes to refine your code
+from Assignment 6.</p>
+
+<h2><a name="part1">Part 1: Reinforcing the Abstraction Barrier</a></h2>
+
+<p>Add and incorporate these abstract classes into your code.</p>
+
+<p>
+<ul><code>AbstractSocialEntity <em><strong>implements</strong> SocialEntity</em></code>
+<li><em>a constructor</em></li>
+<li>name : <code>String</code></li>
+<li>getName() : <code>String</code></li>
+<li>id : <code>long</code></li>
+<li>getId() : <code>long</code></li>
+<li><strong>abstract</strong> toString() : <code>String</code></li>
+</ul>
+
+
+<ul><code>AbstractSocialGrouping <em><strong>extends</strong> AbstractSocialEntity</em></code>
+<li><em>a constructor</em></li>
+<li>members : <code>Set&lt;Person&gt;</code></li>
+<li>getMembers() : <code>Set&lt;Person&gt;</code></li>
+<li>addMember(<code>Person</code>)</li>
+<li>removeMember(<code>Person</code>) <em>optional</em></li>
+</ul>
+
+</p>
+
+
+<p>Now that you have these abstract classes, you must extend them in the
+appropriate classes from Assignment 6, instead of implementing
+<code>SocialEntity</code> directly.  <em>There is no need to rewrite the
+<code>SocialEntity</code> interface</em>, but you will need to rewrite
+the constructors and some of the relevant methods for each of
+<code>Person, Group, Network,</code> and <code>Band</code>.  Be mindful
+of how and when you initialize or assign each class its fields.
+Remember to use the <code>super</code> constructor, now that you're
+extending abstract classes.  Also remember to use
+<strong><code>protected</code></strong> keyword on the constructors in
+the above abstract classes.
+</p>
+
+
+<h2><a name="part2">Part 2: Improving Functionality</a></h2>
+
+<p>Write a <code>Relationship</code> class and create one or more
+instances; incorporate this into the <code>Person</code> class to model
+a person's primary relationship with another person.  Also incorporate
+Collections into <code>Person</code>, <code>YourFace</code>, and the
+other appropriate classes; there should no longer be any need for
+arrays.</p>
+
+<p>
+
+<ul><code>Relationship</code> class
+<li><em>a constructor</em></li>
+<li>type : <code>String</code></li>
+<li>isMutual : <code>boolean</code></li>
+<li>toString() : <code>String</code></li>
+</ul>
+
+E.g.: friend, enemy, coworker, classmate, sibling, and roommate
+vs. teacher, student, brother, parent, fan, etc.  <strong><em>The
+<code>Relationship</code> class should not extend
+anything.</em></strong><br/>
+
+
+<ul><code>Person <em><strong>extends</strong> AbstractSocialEntity</em></code>
+<li><em>a (modified) constructor</em></li>
+<li>acquaintances : <code>Map&lt;Person, Relationship&gt;</code>
+<li>networks : <code>Set&lt;Network&gt;</code></li>
+<li>location : <code>String</code></li>
+<li>addAcquaintance(<code>Person, Relationship</code>) <em>(optional)</em></li>
+<li>toString() : <code>String</code></li>
+</ul>
+
+<ul><strong><em>Optional alternative:</em></strong> <code>Person <em><strong>extends</strong> AbstractSocialEntity</em></code>
+<li><em>a (modified) constructor</em></li>
+<li>acquaintances : <code>Map&lt;Person,Set&lt;Relationship&gt;&gt;</code></li>
+<li>networks : <code>Set&lt;Network&gt;</code></li>
+<li>location : <code>String</code></li>
+<li>addAcquaintance(<code>Person</code>)</li>
+<li>addAcquaintance(<code>Person, Relationship</code>)</li>
+<li>toString() : <code>String</code></li>
+</ul>
+
+</p>
+
+<p>Feel free to add additional methods or fields if they're necessary or
+useful.  The optional alternative <code>Person</code> class would allow
+us to model multiple relationships between <code>this</code> and another
+<code>Person</code>, instead of only one "primary"
+relationship. <em>NOTE: You may want to look into the <code><a
+href="http://java.sun.com/javase/6/docs/api/java/util/Map.html">Map</a></code>
+methods put(K,V), get(K), keySet(), and entrySet().</em> Also optional:
+When adding a &lt;<code>Person, Relationship</code>&gt; mapping to a
+<code>Person</code>, you may also want to check whether or not the
+<code>Relationship</code> is mutual and take the appropriate action
+(i.e., add <code><strong>this</strong> Person</code> and the same
+<code>Relationship</code> to said acquaintance's own acquaintance set).
+</p>
+
+
+<h2><a name="part3">Part 3: Organize the Classes</h2>
+
+<p>If you haven't already done so, create a package(s) and subpackage(s)
+to put your classes into. (E.g., <code>com.yourface</code> containing
+the <code>YourFace</code> class and <code>com.yourface.entities</code>
+for the <code>SocialEntity</code> intreface and related classes.)
+</p>
+
+<p class="summary">Remember to use techniques &amp; follow principles
+mentioned in lecture, and add comments where the code is doing something
+that isn't obvious!  Email any questions to <a
+href="mailto:iapjava-staff%40mit.edu?Subject=6.092%20Assignment%207%20question">the
+staff</a>, and send your solutions to <a
+href="mailto:manus%40mit.edu?Subject=6.092%20Assignment%207">Usman</a>
+in an archive (<a
+href="http://java.sun.com/docs/books/tutorial/deployment/jar/basicsindex.html">jar</a>/zip/tar/rar
+containing .java files only, please!)  by <strong><u>10am</u> <em>before
+Thurdsay's class</em></strong>.</p>
+
+</div>
+
+</div>
+</div>
+
+</body>
+</html>

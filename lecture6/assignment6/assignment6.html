@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+  PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN'
+  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>6.092: Assignment 6</title>
+<style type="text/css">
+h1, h2, h3 {
+    font-family: helvetica, arial, sans-serif;
+}
+</style>
+</head>
+<body>
+<h1>6.092: Assignment 6: Graphics strikes back!</h1>
+
+<p>In the last assignment, you were provided with a BouncingBox class. This
+class contains logic for two things:</p>
+
+<ol>
+<li>drawing boxes on the screen, and</li>
+<li>moving the boxes around once drawn.</li>
+</ol>
+
+<p>In this assignment, we will explore separating this functionality into
+two classes.  This way, one class can handle moving any drawable object
+around the screen, and it can move any kind of object that we define in
+another class, which sill simply draw itself on the screen.</p>
+
+<p>We provide you with Bouncer, a class that only has the code for moving
+objects by bouncing them off the edges of the window.
+Bouncer is initialized with an object that implements the Sprite interface
+to draw an object, and to compute the size of the object so it knows when 
+to bounce. This allows the Bouncer to move any graphical objects, 
+that could be written by multiple people.</p>
+
+<p><em>Note:</em> <a href="http://en.wikipedia.org/wiki/Sprite_(computer_graphics)">Sprite</a> is a computer graphics term for a small animated object.</p>
+
+<h2>Setup</h2>
+
+<p>This assignment uses the same SimpleDraw class from the previous assignment. However, the other classes are different. You can reuse your previous project, or start a new one. However, you probably want to keep your previous DrawGraphics class, since you may want to borrow some code from it.</p>
+
+<ol>
+<li>Create new classes, copying and pasting the source code from below for the following classes: SimpleDraw, DrawGraphics, Rectangle, Bouncer, StraightMover, Sprite. <em>Alternative</em>: If you are comfortable with managing files on your computer, you can download the initial project as a <a href="../2/assignment6.zip">.zip file</a>. Extract the files somewhere. Create a new project in Eclipse, selecting "from existing source," and point it at directory you extracted from the .zip.</li>
+<li>Run this new project (you may need to open SimpleDraw, then choose Run). You should see a moving rectangle that bounces off the edges of the screen.</li>
+</ol>
+
+
+<h2>Implementing Interfaces</h2>
+
+<p>Since Bouncer supports drawing objects of different types, let's create one!</p>
+
+<p><em>Requirement:</em> Create a new class that implements the Sprite interface and draws some shape that is not a rectangle. Change DrawGraphics to contain an ArrayList of Bouncer objects. Add one rectangle and one of your own shapes to the ArrayList, and make them move. When you run your program, you should see one Rectangle and one of your own objects bouncing off the edges of the window.</p>
+
+<h3>Suggested Steps</h3>
+<ol>
+<li>Change DrawGraphics to contain an ArrayList of Bouncer objects instead of a single Sprite. This is just like what you did in the previous assignment.</li>
+<li>Run your program. It should draw the same thing on the screen as before, except now it should be using the ArrayList.</li>
+<li>Add a second Rectangle to the ArrayList and make it move. When you run your program, you should now have two Rectangles.</li>
+<li>Create a new class, and give it a name that describes the shape you want to make (eg. Line, Oval, Star, Text, Arrow).</li>
+<li>Make this class implement the Sprite interface. You will need to add implementations of all the methods in the interface. For now, make these methods do nothing (eg. empty methods, and return 0 if needed).</li>
+<li>Replace one of the Rectangles in DrawGraphics with your own object. This means the ArrayList will contain a Rectangle and your own object. Run your program. You should now see only one Rectangle, since your object doesn't have code to draw on the screen yet.</li>
+<li>Add code to your object's draw() method to draw the shape you want. Run the program until it looks the way you want it to. <em>Hint:</em> You may want to use Rectangle as an example.</li>
+<li>At this point, your shape may not bounce off the edges correctly. It might falls off the right and bottom edges of the window before changing directions. The reason is that you need to return a correct width and height from getWidth() and getHeight(), so the Bouncer knows when to make it change directions. Fix these two methods to return the appropriate values.</li>
+<li>At the end, when you run your program you should have a rectangle and your own shape moving on the screen, and bouncing off the edges. Feel free to add extra shapes, if you like.</li>
+</ol>
+
+
+<h2>Multiple Movement Patterns</h2>
+
+<p>We have split the movement and drawing code into two separate classes. This means we can use different movement classes with both the Rectangle and the new shape you have created.</p>
+
+<p><em>Requirement:</em> Add an ArrayList of StraightMovers to DrawGraphics. Add a rectangle and one of your shapes to this ArrayList. When we run your program, we should see at least four shapes: two rectangles and two of your own shapes. Two of them should bounce off the edges of the window, and two of them should move off the edge of the screen.</p>
+
+<h3>Suggested Steps</h3>
+<ol>
+<li>Add an ArrayList of StraightMovers to DrawGraphics.</li>
+<li>Call draw() on each StraightMover from the DrawGraphics.draw() method.</li>
+<li>Put a new rectangle and a new instance of your shape in this ArrayList. <em>Hint:</em> You can copy the code for the ArrayList of Bouncers, but you'll have to rename things and give the instances new initial positions.</li>
+<li>Run your program again. You should see four shapes that move: two that bounce and two that don't.</li>
+</ol>
+
+
+<h2>Creating Interfaces</h2>
+
+<p>You'll notice that in your DrawGraphics class, you have code that basically does the same thing with Bouncer and with StraightMover. This is a perfect opportunity to create a new interface to reduce duplication.</p>
+
+<p><em>Requirement:</em> Create a new interface called Mover. Make Bouncer and StraightMover class implement this new interface. Change DrawGraphics to contain a single ArrayList of Mover. This ArrayList should contain four objects: two Bouncers and two StraightMover. This should eliminate most of the duplication from your DrawGraphics class.</p>
+
+<h3>Suggested Steps</h3>
+<ol>
+<li>Create a new interface called Mover. Initially it will be empty.</li>
+<li>Make both Bouncer and StraightMover implement the Mover interface.</li>
+<li>Change your DrawGraphics class to contain a single ArrayList of Mover objects. At this point, DrawGraphics will not compile. The problem is that there will be methods that you are calling on Mover instances, but there are no methods in the Mover interface.</li>
+<li>Add the method(s) you use in DrawGraphics to the Mover interface. <em>Hint:</em> This should be the method(s) that have the same <em>signature</em> in Bouncer and StraightMover.</li>
+<li>At this point, your program should run and will look the same as before.</li>
+</ol>
+
+
+<h2>(Optional) Reducing Duplication</h2>
+
+<p>The Bouncer and StraightMover classes have a lot of duplicate code. Eliminate this duplication by putting all the common code into one class, and removing it from the Bouncer and StraightMover classes.</p>
+
+
+<h2>Submission Instructions</h2>
+
+<p>Submit three files: DrawGraphics, Mover, and your shape. If you do the optional part, also submit your new class, and the Bouncer and StraightMover classes.</p>
+
+<h2>SimpleDraw</h2>
+<p class="code">
+<!--STARTINCLUDE ../../lecture5/SimpleDraw.java -->
+import&nbsp;java.awt.Color;<br />
+import&nbsp;java.awt.Dimension;<br />
+import&nbsp;java.awt.Graphics;<br />
+import&nbsp;java.awt.Graphics2D;<br />
+import&nbsp;java.awt.RenderingHints;<br />
+import&nbsp;java.awt.event.WindowAdapter;<br />
+import&nbsp;java.awt.event.WindowEvent;<br />
+<br />
+import&nbsp;javax.swing.JFrame;<br />
+import&nbsp;javax.swing.JPanel;<br />
+<br />
+/**&nbsp;Displays&nbsp;a&nbsp;window&nbsp;and&nbsp;delegates&nbsp;drawing&nbsp;to&nbsp;DrawGraphics.&nbsp;*/<br />
+public&nbsp;class&nbsp;SimpleDraw&nbsp;extends&nbsp;JPanel&nbsp;implements&nbsp;Runnable&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;static&nbsp;final&nbsp;long&nbsp;serialVersionUID&nbsp;=&nbsp;-7469734580960165754L;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;boolean&nbsp;animate&nbsp;=&nbsp;true;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;final&nbsp;int&nbsp;FRAME_DELAY&nbsp;=&nbsp;50;&nbsp;//&nbsp;50&nbsp;ms&nbsp;=&nbsp;20&nbsp;FPS<br />
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;final&nbsp;int&nbsp;WIDTH&nbsp;=&nbsp;300;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;final&nbsp;int&nbsp;HEIGHT&nbsp;=&nbsp;300;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;DrawGraphics&nbsp;draw;<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;SimpleDraw(DrawGraphics&nbsp;drawer)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.draw&nbsp;=&nbsp;drawer;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;/**&nbsp;Paint&nbsp;callback&nbsp;from&nbsp;Swing.&nbsp;Draw&nbsp;graphics&nbsp;using&nbsp;g.&nbsp;*/<br />
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;paintComponent(Graphics&nbsp;g)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super.paintComponent(g);<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Enable&nbsp;anti-aliasing&nbsp;for&nbsp;better&nbsp;looking&nbsp;graphics&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Graphics2D&nbsp;g2&nbsp;=&nbsp;(Graphics2D)&nbsp;g;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,&nbsp;RenderingHints.VALUE_ANTIALIAS_ON);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;draw.draw(g2);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;/**&nbsp;Enables&nbsp;periodic&nbsp;repaint&nbsp;calls.&nbsp;*/<br />
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;synchronized&nbsp;void&nbsp;start()&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;animate&nbsp;=&nbsp;true;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;/**&nbsp;Pauses&nbsp;animation.&nbsp;*/<br />
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;synchronized&nbsp;void&nbsp;stop()&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;animate&nbsp;=&nbsp;false;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;synchronized&nbsp;boolean&nbsp;animationEnabled()&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;animate;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;run()&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while&nbsp;(true)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(animationEnabled())&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;repaint();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thread.sleep(FRAME_DELAY);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;catch&nbsp;(InterruptedException&nbsp;e)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;new&nbsp;RuntimeException(e);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;static&nbsp;void&nbsp;main(String&nbsp;args[])&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;final&nbsp;SimpleDraw&nbsp;content&nbsp;=&nbsp;new&nbsp;SimpleDraw(new&nbsp;DrawGraphics());<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JFrame&nbsp;frame&nbsp;=&nbsp;new&nbsp;JFrame("Graphics!");<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Color&nbsp;bgColor&nbsp;=&nbsp;Color.white;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;frame.setBackground(bgColor);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content.setBackground(bgColor);<br />
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content.setSize(WIDTH,&nbsp;HEIGHT);<br />
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content.setMinimumSize(new&nbsp;Dimension(WIDTH,&nbsp;HEIGHT));<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content.setPreferredSize(new&nbsp;Dimension(WIDTH,&nbsp;HEIGHT));<br />
+//&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;frame.setSize(WIDTH,&nbsp;HEIGHT);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;frame.setContentPane(content);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;frame.setResizable(false);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;frame.pack();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;frame.addWindowListener(new&nbsp;WindowAdapter()&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;windowClosing(WindowEvent&nbsp;e)&nbsp;{&nbsp;System.exit(0);&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;windowDeiconified(WindowEvent&nbsp;e)&nbsp;{&nbsp;content.start();&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;windowIconified(WindowEvent&nbsp;e)&nbsp;{&nbsp;content.stop();&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new&nbsp;Thread(content).start();<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;frame.setVisible(true);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}<br />
+<!--ENDINCLUDE-->
+</p>
+
+<h2>DrawGraphics</h2>
+<p class="code">
+<!--STARTINCLUDE DrawGraphics.java -->
+import&nbsp;java.awt.Color;<br />
+import&nbsp;java.awt.Graphics;<br />
+<br />
+public&nbsp;class&nbsp;DrawGraphics&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;Bouncer&nbsp;movingSprite;<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;/**&nbsp;Initializes&nbsp;this&nbsp;class&nbsp;for&nbsp;drawing.&nbsp;*/<br />
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;DrawGraphics()&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rectangle&nbsp;box&nbsp;=&nbsp;new&nbsp;Rectangle(15,&nbsp;20,&nbsp;Color.RED);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;movingSprite&nbsp;=&nbsp;new&nbsp;Bouncer(100,&nbsp;170,&nbsp;box);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;movingSprite.setMovementVector(3,&nbsp;1);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;/**&nbsp;Draw&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;window&nbsp;on&nbsp;surface.&nbsp;*/<br />
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;draw(Graphics&nbsp;surface)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;movingSprite.draw(surface);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}<br />
+<!--ENDINCLUDE-->
+</p>
+
+<h2>Rectangle</h2>
+<p class="code">
+<!--STARTINCLUDE Rectangle.java -->
+import&nbsp;java.awt.BasicStroke;<br />
+import&nbsp;java.awt.Color;<br />
+import&nbsp;java.awt.Graphics;<br />
+import&nbsp;java.awt.Graphics2D;<br />
+<br />
+public&nbsp;class&nbsp;Rectangle&nbsp;implements&nbsp;Sprite&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;int&nbsp;width;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;int&nbsp;height;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;Color&nbsp;color;<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;/**<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Create&nbsp;a&nbsp;box&nbsp;that&nbsp;has&nbsp;dimensions&nbsp;width&nbsp;and&nbsp;height,&nbsp;filled&nbsp;with<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;startColor.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br />
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;Rectangle(int&nbsp;width,&nbsp;int&nbsp;height,&nbsp;Color&nbsp;color)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.width&nbsp;=&nbsp;width;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.height&nbsp;=&nbsp;height;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.color&nbsp;=&nbsp;color;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;draw(Graphics&nbsp;surface,&nbsp;int&nbsp;x,&nbsp;int&nbsp;y)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Draw&nbsp;the&nbsp;object<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;surface.setColor(color);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;surface.fillRect(x,&nbsp;y,&nbsp;width,&nbsp;height);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;surface.setColor(Color.BLACK);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;((Graphics2D)&nbsp;surface).setStroke(new&nbsp;BasicStroke(3.0f));<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;surface.drawRect(x,&nbsp;y,&nbsp;width,&nbsp;height);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;int&nbsp;getWidth()&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;width;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;int&nbsp;getHeight()&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;height;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}<br />
+<!--ENDINCLUDE-->
+</p>
+
+<h2>Bouncer</h2>
+<p class="code">
+<!--STARTINCLUDE Bouncer.java -->
+import&nbsp;java.awt.Graphics;<br />
+<br />
+public&nbsp;class&nbsp;Bouncer&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;int&nbsp;x;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;int&nbsp;y;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;int&nbsp;xDirection;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;int&nbsp;yDirection;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;Sprite&nbsp;sprite;<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;/**&nbsp;Create&nbsp;a&nbsp;Bouncer&nbsp;that&nbsp;positions&nbsp;sprite&nbsp;at&nbsp;(startX,&nbsp;startY).&nbsp;*/<br />
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;Bouncer(int&nbsp;startX,&nbsp;int&nbsp;startY,&nbsp;Sprite&nbsp;sprite)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x&nbsp;=&nbsp;startX;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;=&nbsp;startY;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.sprite&nbsp;=&nbsp;sprite;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;/**&nbsp;Starts&nbsp;moving&nbsp;the&nbsp;object&nbsp;in&nbsp;the&nbsp;direction&nbsp;(xIncrement,&nbsp;yIncrement).&nbsp;*/<br />
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;setMovementVector(int&nbsp;xIncrement,&nbsp;int&nbsp;yIncrement)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xDirection&nbsp;=&nbsp;xIncrement;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yDirection&nbsp;=&nbsp;yIncrement;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;/**&nbsp;Draws&nbsp;the&nbsp;sprite&nbsp;at&nbsp;its&nbsp;current&nbsp;position&nbsp;on&nbsp;to&nbsp;surface.&nbsp;*/<br />
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;draw(Graphics&nbsp;surface)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Draw&nbsp;the&nbsp;sprite<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sprite.draw(surface,&nbsp;x,&nbsp;y);<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Move&nbsp;the&nbsp;object&nbsp;each&nbsp;time&nbsp;we&nbsp;draw&nbsp;it<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x&nbsp;+=&nbsp;xDirection;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;+=&nbsp;yDirection;<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;If&nbsp;we&nbsp;have&nbsp;hit&nbsp;the&nbsp;edge&nbsp;and&nbsp;are&nbsp;moving&nbsp;in&nbsp;the&nbsp;wrong&nbsp;direction,&nbsp;reverse&nbsp;direction<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;We&nbsp;check&nbsp;the&nbsp;direction&nbsp;because&nbsp;if&nbsp;a&nbsp;box&nbsp;is&nbsp;placed&nbsp;near&nbsp;the&nbsp;wall,&nbsp;we&nbsp;would&nbsp;get&nbsp;"stuck"<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;rather&nbsp;than&nbsp;moving&nbsp;in&nbsp;the&nbsp;right&nbsp;direction<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;((x&nbsp;&lt;=&nbsp;0&nbsp;&amp;&amp;&nbsp;xDirection&nbsp;&lt;&nbsp;0)&nbsp;||<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(x&nbsp;+&nbsp;sprite.getWidth()&nbsp;>=&nbsp;SimpleDraw.WIDTH&nbsp;&amp;&amp;&nbsp;xDirection&nbsp;>&nbsp;0))&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xDirection&nbsp;=&nbsp;-xDirection;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;((y&nbsp;&lt;=&nbsp;0&nbsp;&amp;&amp;&nbsp;yDirection&nbsp;&lt;&nbsp;0)&nbsp;||<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(y&nbsp;+&nbsp;sprite.getHeight()&nbsp;>=&nbsp;SimpleDraw.HEIGHT&nbsp;&amp;&amp;&nbsp;yDirection&nbsp;>&nbsp;0))&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yDirection&nbsp;=&nbsp;-yDirection;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}<br />
+<!--ENDINCLUDE-->
+</p>
+
+<h2>StraightMover</h2>
+<p class="code">
+<!--STARTINCLUDE StraightMover.java -->
+import&nbsp;java.awt.Graphics;<br />
+<br />
+<br />
+public&nbsp;class&nbsp;StraightMover&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;int&nbsp;x;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;int&nbsp;y;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;int&nbsp;xDirection;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;int&nbsp;yDirection;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;Sprite&nbsp;sprite;<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;/**&nbsp;Create&nbsp;a&nbsp;Bouncer&nbsp;that&nbsp;positions&nbsp;sprite&nbsp;at&nbsp;(startX,&nbsp;startY).&nbsp;*/<br />
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;StraightMover(int&nbsp;startX,&nbsp;int&nbsp;startY,&nbsp;Sprite&nbsp;sprite)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x&nbsp;=&nbsp;startX;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;=&nbsp;startY;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.sprite&nbsp;=&nbsp;sprite;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;/**&nbsp;Starts&nbsp;moving&nbsp;the&nbsp;object&nbsp;in&nbsp;the&nbsp;direction&nbsp;(xIncrement,&nbsp;yIncrement).&nbsp;*/<br />
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;setMovementVector(int&nbsp;xIncrement,&nbsp;int&nbsp;yIncrement)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;xDirection&nbsp;=&nbsp;xIncrement;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yDirection&nbsp;=&nbsp;yIncrement;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;draw(Graphics&nbsp;graphics)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sprite.draw(graphics,&nbsp;x,&nbsp;y);<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Move&nbsp;the&nbsp;center&nbsp;of&nbsp;the&nbsp;object&nbsp;each&nbsp;time&nbsp;we&nbsp;draw&nbsp;it<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x&nbsp;+=&nbsp;xDirection;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y&nbsp;+=&nbsp;yDirection;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+}<br />
+<!--ENDINCLUDE-->
+</p>
+
+<h2>Sprite</h2>
+<p class="code">
+<!--STARTINCLUDE Sprite.java -->
+import&nbsp;java.awt.Graphics;<br />
+<br />
+public&nbsp;interface&nbsp;Sprite&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;/**<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Draws&nbsp;this&nbsp;sprite&nbsp;on&nbsp;surface,&nbsp;with&nbsp;the&nbsp;coordinate&nbsp;(leftX,&nbsp;topY)&nbsp;as&nbsp;the<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;top&nbsp;left&nbsp;corner.<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br />
+&nbsp;&nbsp;&nbsp;&nbsp;void&nbsp;draw(Graphics&nbsp;surface,&nbsp;int&nbsp;leftX,&nbsp;int&nbsp;topY);<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;/**&nbsp;Returns&nbsp;the&nbsp;width&nbsp;of&nbsp;the&nbsp;sprite.&nbsp;*/<br />
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;getWidth();<br />
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;/**&nbsp;Returns&nbsp;the&nbsp;height&nbsp;of&nbsp;the&nbsp;sprite.&nbsp;*/<br />
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;getHeight();<br />
+}<br />
+<!--ENDINCLUDE-->
+</p>
+
+</body></html>

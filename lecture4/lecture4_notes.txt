@@ -1,0 +1,106 @@
+This file are notes on what and how to cover
+I was reading http://www.cafeaulait.org/course/week3 while creating this
+-ewu
+------
+
+LECTURE 4 TOPICS
+ Review
+ Debugging Overview
+ highlevel overview
+ defining a class
+ fields and methods
+ constructor
+  with arguments
+ creating an instance
+ references and values
+ static vs nonstatic 
+
+
+LECTURE 5 TOPICS
+ review
+   - look at a class w/ fields, constructors, 
+ access control - public /private/protected?
+ finding names - scope
+ packages
+  special packages - java.lang
+  imports
+ java API
+ Object arrays
+ Collections
+  ArrayList
+  Set
+   TreeSet
+	 HashSet
+  Map
+	 TreeMap
+	 HashMap
+
+
+Review
+ solutions
+ Issues
+  array index vs value
+  braces for loops
+  method declared within methods (will talk about it later)
+  variable initialization (for 2nd fastest)
+  
+Debugging notes
+ printlns
+ ctrl-shift-f
+
+Introduce OOP
+ represent real world
+ builds on primitives and other objects
+  group attributes together
+ Motivation of classes
+  example of representing an object using _only_ primitives
+  example of a class of only primitives
+
+Introduce classes and objects
+  difference between the two
+  blueprint vs house
+ example of a class
+ example of an object _instance_
+
+Introduce a field only class
+ Car
+  license
+  speed
+  maxspeed
+
+Initialize it
+ Car batmobile = new Car()
+
+Access a field
+ print batmobile.speed
+ batmobile.speed = 50
+
+Methods - keep the public static
+ public static void floorIt()
+
+Call the method
+ batmobile.floorIt()
+
+Method with argument
+ public static void printSpeedAsPhrase()
+  if speed == 0: print 
+  elif speed < 50: print cruisin
+  elif speed > 100: print blazin
+  else: print speeding
+
+Constructor
+ special syntax
+ arguments
+
+References and values
+ recap - objects and primitives
+ passing objects and setting objects
+  pictures!!!
+  array is an object
+
+ 
+static 
+ doesn't act on the instance - how to get this across?
+nonstatic
+ can reference static fields/methods, not the other way around
+ what does java know?

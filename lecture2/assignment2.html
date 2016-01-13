@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+  PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN'
+  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>6.092: Assignment 2</title>
+<style type="text/css">
+h1, h2 {
+    font-family: helvetica, arial, sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th {
+    border-bottom: solid thin black;
+}
+
+td, th {
+    padding-right: 1em;
+}
+
+</style>
+</head>
+<body>
+
+<h1>6.092: Assignment 2</h1>
+
+<p>Foo Corporation needs a program to calculate how much to pay their hourly employees. The US Department of Labor requires that employees get paid time and a half for any hours over 40 that they work in a single week. For example, if an employee works 45 hours, they get 5 hours of overtime, at 1.5 times their base pay. The State of Massachusetts requires that hourly employees be paid at least $8.00 an hour. Foo Corp requires that an employee not work more than 60 hours in a week.</p>
+
+<h2>Summary of Rules</h2>
+
+<ul>
+<li>An employee gets paid (hours worked) × (base pay), for each hour up to 40 hours.</li>
+<li>For every hour over 40, they get overtime = (base pay) × 1.5.</li>
+<li>The base pay must not be less than the minimum wage ($8.00 an hour). If it is, print an error.</li>
+<li>If the number of hours is greater than 60, print an error message.</li>
+</ul>
+
+<h2>Directions</h2>
+
+<p>Create a new class called <code>FooCorporation</code>.</p>
+
+<p>Write a method that takes the base pay and hours worked as parameters, and prints the total pay or an error. Write a <code>main</code> method that calls this method for each of these employees:</p>
+
+<table>
+<tr><th></th><th>Base Pay</th><th>Hours Worked</th></tr>
+<tr><td>Employee 1</td><td align="right">$7.50</td><td align="right">35</td></tr>
+<tr><td>Employee 2</td><td align="right">$8.20</td><td align="right">47</td></tr>
+<tr><td>Employee 3</td><td align="right">$10.00</td><td align="right">73</td></tr>
+</table>
+
+<h2>Submission Instructions</h2>
+
+<p>
+Submit your <code>FooCorporation.java</code> file via Stellar.
+</p>
+
+<h2>Hint</h2>
+
+<p>Do <em>not</em> try to write the entire program in one go. It is much easier to write a small piece and test it, then write another small piece and test it. For example, start by writing just a skeleton of your method and your main program. Then add the code to do the normal salary computation, without any special rules. Then add each additional rule, one at a time. You should test your program with simple test inputs to check that you handle each case.</p>
+
+<p>Good luck!</p>
+
+</body></html>

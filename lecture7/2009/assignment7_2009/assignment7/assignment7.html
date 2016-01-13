@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+  PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN'
+  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>6.092 Assignment 7: Modeling a Social Network</title>
+<style type="text/css">
+h1, h2, h3 {
+    font-family: helvetica, arial, sans-serif;
+}
+
+a:link {
+    color:        #0066CC;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+</style>
+</head>
+<body>
+<h1>6.092 Assignment 6: Modeling a Social Network</h1>
+
+<p>Your assignment is to use your current knowledge
+about Java, OOP, and Software Design to model certain aspects of a
+simple Social Network. These specifications are intentionally loose in
+order to give you creative freedom and to test your problem-solving
+skills.</p>
+
+<h2><a name="part1"></a>Part 1: <code>SocialEntity</code> Interface</h2>
+
+<p>The <code>SocialEntity</code> is the basic model for anyone or
+anything in the social network.  Every <code>SocialEntity</code> has a
+name (<code>String</code>) and a unique ID (<code>long</code>) that can
+be accessed only through its <code>getName()</code> and
+<code>getId()</code> methods. <em>Note that fields in interfaces are
+automatically final and methods are automatically abstract!</em></p>
+
+<h2><a name="part2"></a>Part 2: Subclasses of <code>SocialEntity</code></h2>
+
+<p>Types of <code>SocialEntity</code>s:</p>
+
+<ul>
+<li><code>Person</code> - has acquaintances : a list of <code>Person</code>,
+networks : a list of <code>Network</code>, and a location : <code>String</code></li>
+
+<li><code>Network</code> - members : a list of <code>Person</code></li>
+
+<li><code>Band</code> - fans : a list of <code>Person</code>, description :
+<code>String</code>, location : <code>String</code></li>
+
+</ul>
+
+<p>Write the appropriate constructors and methods for each class.  Be
+mindful of how and when you initialize or assign each class its fields.
+</p>
+
+<h2><a name="part3"></a>Part 3: <code>YourFace</code> Class</h2>
+
+<p>The <code>YourFace</code> class is our entryway into the social
+network.  That is, it should have a <code>main</code> method, which
+should create seven <code>Person</code>s (each with three acquaintances
+and any number of <code>Networks</code>), 
+ two <code>Network</code> (each with one or
+more member), and two <code>Band</code>s with any number of fans.  After
+creating and populating your social network, you should print all the
+information about each <code>Person</code> in the network.
+</p>
+
+<p>Remember to use encapsulation techniques, follow
+other OOP principles mentioned in lecture, and add comments where the
+code is doing something that isn't obvious!  Email any questions to <a
+href="mailto:iapjava-staff@mit.edu?Subject=6.092 Assignment 7 question">the
+staff</a>, and submit your solution on Stellar as usual. Remember to include all your Java files!
+</p>
+
+</body>
+</html>

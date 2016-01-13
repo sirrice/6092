@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+  PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN'
+  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>6.092: Assignment 8</title>
+<style type="text/css">
+h1, h2 {
+    font-family: helvetica, arial, sans-serif;
+}
+
+a {
+    color:        #0066CC;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+// Styles for code snippet
+.S0 {
+	color: #808080;
+}
+.S2 {
+	font-family: serif;
+	color: #007F00;
+	font-size: 10pt;
+}
+.S3 {
+	font-family: serif;
+	color: #3F703F;
+	font-size: 10pt;
+}
+.S4 {
+	color: #007F7F;
+}
+.S5 {
+	font-weight: bold;
+	color: #00007F;
+}
+.S6 {
+	color: #7F007F;
+}
+.S10 {
+	font-weight: bold;
+	color: #000000;
+}
+
+.code {
+	font-family: sans-serif;
+	color: #000000;
+	font-size: 11pt;
+}
+</style>
+</head>
+<body>
+
+<h1>6.092: Assignment 8: Magic Squares!</h1>
+
+<p>A magic square of order n is an arrangement of n*n numbers, usually distinct integers, in a square, such that the n numbers in all rows, all columns, and both diagonals sum to the same constant (see Wikipedia <a href="http://en.wikipedia.org/wiki/Magic_square">entry</a>).</p>
+
+<p style="text-align: center;"><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Magicsquareexample.svg/180px-Magicsquareexample.svg.png" alt="A magic square"/></p>
+
+<h2>Checking the row values</h2>
+
+<p>We give your two text files: Mercury.txt and Luna.txt</p>
+
+<p>For each file, we ask you to open the file, and to check that all rows indeed sum to the same constant.</p>
+
+<h2>Hints</h2>
+
+<p>Copy both text files to the root directory of your project.</p>
+
+<p>Read the files line by line as explained during the lecture today.</p>
+
+<p>Use <tt> ... = myLine.split("\t"); </tt> to transform each line into an array of String, each containing one value (take a look at the Java API).</p>
+	
+<p>Finally, use <tt> ... = Integer.valueOf(substring); </tt> to transform each string value into an integer value.</p>
+
+<h2>Optional Part: Column / Diagonal Values</h2>
+
+<p>Optionally, try to check that the columns and the diagonal also sum to the same constant. This might be slightly trickier!</p>
+
+<h2>Submission Instructions</h2>
+
+<p>Submit your <tt>MagicSquares.java</tt> file via Stellar.</p>
+
+</body></html>

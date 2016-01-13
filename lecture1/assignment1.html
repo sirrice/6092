@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+  PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN'
+  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>6.092: Assignment 1</title>
+<style type="text/css">
+h1, h2 {
+    font-family: helvetica, arial, sans-serif;
+}
+
+a {
+    color:        #0066CC;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+// Styles for code snippet
+.S0 {
+	color: #808080;
+}
+.S2 {
+	font-family: serif;
+	color: #007F00;
+	font-size: 11pt;
+}
+.S4 {
+	color: #007F7F;
+}
+.S5 {
+	font-weight: bold;
+	color: #00007F;
+}
+.S6 {
+	color: #7F007F;
+}
+.S10 {
+	font-weight: bold;
+	color: #000000;
+}
+.code {
+	font-family: sans-serif;
+	color: #000000;
+	font-size: 11pt;
+}
+</style>
+</head>
+<body>
+
+<h1>6.092: Assignment 1</h1>
+
+<p>In this assignment, you will create a program that computes the distance an object will fall in Earth's gravity.</p>
+
+<h2>Part One</h2>
+
+<ol>
+<li>Create a new class called <code>GravityCalculator</code>.</li>
+<li><p>Copy and paste the following initial version:</p>
+
+<!-- Code styled using SciTE: http://www.scintilla.org/SciTE.html -->
+<p class="code">
+<span class="S5">class</span><span class="S0"> </span>GravityCalculator<span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">static</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>main<span class="S10">(</span>String<span class="S10">[]</span><span class="S0"> </span>arguments<span class="S10">)</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">double</span><span class="S0"> </span>gravity<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S10">-</span><span class="S4">9.81</span><span class="S10">;</span><span class="S0"> &nbsp;</span><span class="S2">// Earth's gravity in m/s^2</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">double</span><span class="S0"> </span>initialVelocity<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0.0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">double</span><span class="S0"> </span>fallingTime<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">10.0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">double</span><span class="S0"> </span>initialPosition<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0.0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">double</span><span class="S0"> </span>finalPosition<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0.0</span><span class="S10">;</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>System<span class="S10">.</span>out<span class="S10">.</span>println<span class="S10">(</span><span class="S6">"The object's position after "</span><span class="S0"> </span><span class="S10">+</span><span class="S0"> </span>fallingTime<span class="S0"> </span><span class="S10">+</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S6">" seconds is "</span><span class="S0"> </span><span class="S10">+</span><span class="S0"> </span>finalPosition<span class="S0"> </span><span class="S10">+</span><span class="S0"> </span><span class="S6">" m."</span><span class="S10">);</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><br />
+<span class="S10">}</span>
+</p>
+</li>
+<li>Run it in Eclipse (Run → Run As → Java Application).</li>
+</ol>
+
+<p>What is the output of the unmodified program? Include this as a comment in the source code of your submission.</p>
+
+
+<h2>Part Two</h2>
+
+<p>Modify the example program to compute the position of an object after falling for 10 seconds, outputting the position in meters. The formula in Math notation is:</p>
+
+<p>x(t) = 0.5 × at<sup>2</sup> + v<sub>i</sub>t + x<sub>i</sub></p>
+
+<table>
+<tr><th>Variable</th><th>Meaning</th><th>Value</th></tr>
+<tr><td>a</td><td>Acceleration (m/s<sup>2</sup>)</td><td>-9.81</td></tr>
+<tr><td>t</td><td>Time (s)</td><td>10</td></tr>
+<tr><td>v<sub>i</sub></td><td>Initial velocity (m/s)</td><td>0</td></tr>
+<tr><td>x<sub>i</sub></td><td>Initial position</td><td>0</td></tr>
+</table>
+
+<p><em>Note</em>: The correct value is -490.5 m. Java will output more digits after the decimal place, but that is unimportant.</p>
+
+<h2>Submission Instructions</h2>
+
+<p>Submit your <tt>GravityCalculator.java</tt> file via Stellar. The assignment is due Monday, January 17th at 3 PM.</p>
+
+</body></html>

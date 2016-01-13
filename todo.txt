@@ -1,0 +1,123 @@
+= TODO for future years
+$Id$
+
+These are notes on what to do better in the future.
+
+GENERALLY: Too much material in some of the earlier lectures. It would be better to spread it out over more lectures. By the end, there are a group of students who are pretty deeply confused. Don't be afraid to make some of the lectures really short, since then there is more time to help with the assignments. For example, you could have Java containers be ONE lecture.
+
+
+== Lecture 1
+
+* Took ~60 minutes with the Eclipse demo.
+* The "type conversions" section is confusing and needs a bit more work.
+* Advertise the How to Think Like a Computer Scientist text book in the intro slides. In 2009 I had email conversations with at least two confused students who said that its explanations were useful.
+* Room was empty after 1.5 hours. Maybe assignment should be more challenging? The lecture include more material?
+* Discuss conditionals here? Would help the next lecture be shorter. 
+
+
+== Lecture 2
+
+* Lecture took an entire hour. By the end of the second hour, only 10 students remained.
+* Example Square4 should *use* the returned value from the square method. Currently, it just prints it, which seems useless compared to the printSquare version.
+* Maybe show a mathematical expression? This might help understand how things get evaluated: x = sin(f(pi)/2)?
+* Describe how expressions are evaluated? Question about where the value gets returned TO.
+* Assignment is about the right difficulty.
+
+
+== Lecture 3
+
+* Took ~50 minutes.
+* while (true); Use while (true) {} instead to avoid confusion? Or just remove this?
+* On 'breaking statements' slides, the 'break' and 'continue' are nested in an if statement without curly brackets.  Add curly brackets to avoid confusion.
+* Defining Arrays: "arrays are just another type": show arrays of Strings or doubles? Arrays of arrays are an "advanced" concept.
+* Accessing arrays: I think "reading" from the array should go before "writing to" the array
+* Array looping using *: move int square into the for loop; that's good coding practice!
+* Array looping using while/for: Put the while loop first because It is more "fundamental"? for is a "shortcut"
+* Assignment is a good length with the "find second shortest" as an optional problem.
+* Students get confused about the difference between the _index_ and the _value_ of an array element. Some of this is because it is a hard concept, but maybe we could do a better job explaining it?
+* Some students find it hard to think about how to find the minimum element. We could talk about this in class, but maybe it is good to let them struggle. Maybe the next lecture could talk about "approaches for finding algorithms"? The minimum algorithm is "successive refinement," where you guess the minimum then improve your guess. This is a general algorithmic technique. The other technique is to think about how people find the minimum. Maybe with such a small list, people don't realize how they find the minimum: they just look at the whole list and then pick out the minimum element. However, if you were to imagine that you had a book filled with times, you would need to find the minimum on the first page, then compare that with all values on the second page, etc.
+* Common issue: missing {} after if, for, etc. Using ";" means that it has no statements. Forgetting {} only takes the next one. These are tricky because it compiles but doesn't work!
+* Discuss debugging with println?
+* Discuss writing programs incrementally?
+
+
+== Lecture 4
+
+* Popular issue 2 (curly braces): Actually show what happens if you use Eclipse Format? And show the "correct" solution by adding {}
+* This version is much better than before, but I still think it would be better to have this lecture should focus on *using* pre-existing objects? Then the next lecture could describe creating our own objects.
+* Baby[] siblings raises questions about references (eg. "how can I initialize the siblings?"). Maybe keep the example simpler, eg Nursery[] babies.
+* Should avoid discussing public/not public. We can just state "for now, you need public in front of your methods."
+* Baby methods should be public? void sayHi() -> public void sayHi()? Q: "why doesn't it say public static here?"
+* Need to explain *something* about static VS non-static methods, unfortunately. We could try rearranging the course to not describe static methods?
+* static variables are evil. We should just talk about static methods, not static variables.
+* Maybe we describe the "search order" for variables: static means in belongs to the class. All instances are "inside" the class, so they search first for "instance" methods/variables, then search for static methods/variables.
+* Some question about boolean variables here (isMale). Maybe the slide with the constructor needs an example creating both a male and female baby?
+* Shiloh Jolie-Pitt is female; Knox is male
+* Some question about variable access/method calls, why we need variableName before the .methodName?
+* What is the difference between an instance and a constructor?
+* References VS values: move the diagram showing what happens when you use = before talking about equality? Maybe show an example with Strings, because that is somewhat 
+* Baby example later doesn't have the true/false for gender: use Strings instead?
+* Maybe we can skip the references/values discussion?
+* The assignment should not require static methods or variables to avoid confusion.
+* The assignment may be too hard. The book part is easy, the Library part is relatively tough.
+* The Constructor lost a bunch of people - the use of initializing variables in the constructor was not clear
+* Maybe need to describe what happens when java encounters a "new Object("foo");" statement
+
+
+== Lecture 5
+
+* Maybe should go _before_ lecture 4?
+* More explanation about generics is likely needed: maybe describe that they are optional, and what their purpose is? Definitely don't want to get into deep details about this.
+* Access control: while explaining this in terms of secrecy/security is okay, but really access control is about avoiding bugs, and provides no security. Should we talk about this instead?
+* Packages: May need to motivate why packages exist before talking about all the mechanims?
+* Packages: explain the reverse domain name convention?
+* Enhanced for may need a bit more explanation.
+
+
+== Lecture 6
+
+* Revised: too long! Too much fluff. It took about 60 minutes. Move debugging and design stuff to the last lecture, if at all.
+* Missing import java.awt.Color on Drawable interface.
+* We probably need to talk about null sometime earlier in the course.
+* Need to talk more about interfaces: students were generally confused. Talk about them being "compatible" types. Talk about 
+* Some students are still confused about ArrayLists, variables, and putting classes in arraylists. Maybe add diagrams showing what is going on visually?
+* Best practice: define variables only where you need them (smallest scope). People define them in the class a lot.
+* Assignment: probably too long.
+* Assignment: Just get them to submit  DrawGraphics. You won't be able to run it, but that doesn't matter.
+* Assignment: Provide something more interesting than "StraightLineMover"
+* Assignment: The optional part can be solved by passing a "bounce" boolean to the constructor. This can be avoided by having something more complicated than StraightMover. My intention was to have students use another class to hold the position, and create an "update position" interface. However, this might need to be an abstract class. :( Rethink this.
+* Assignment: Some students were confused by the "containment" structure of this assignment, getting confused between Bouncers, Sprites, and Movers
+
+
+== Lecture 7
+
+* Slides should use private in front of class variables, since we said that was a typical "best practice."
+* Maybe use full names instead of hp and mp.
+* Inheritance example: Maybe we could use the sprites etc that students should be somewhat familiar with in the previous assignment?
+* Example: don't re-use arrayoutofboundsexception, use our own exception? Someone was confused about why we are implementing this ourselves, rather than let Java generate the exception.
+* Add a slide with the general form of a try {} catch () {} block.
+* maybe we should talk about handilng exception first, before throwing? We can use Java's built-in exceptions as an example.
+* need to talk about the difference between checked exceptions and uncheck exceptions?
+* What about other exception types?
+* I/O: Demonstrate using System.in in Eclipse?
+* Assignment: make students read stuff from the Internet?
+
+== Lecture 8
+
+* Maybe we should talk about Java doc comments? For Eclipse users, this is actually useful.
+* Assignment might be appropriate earlier, as it requires that students think about a simple algorithm, which is nice. Unfortunately, I/O and exceptions are complicated.
+* We should talk about exceptions here, since they encounter it in the assignment.
+
+
+== Stuff That is Useful for 6.005
+
+Based on conversation with Daniel Jackson.
+
+Writing/Debugging: Only write a few lines at a time until it works. Think scientifically. Have a hypothesis. Test it via experimentation. 
+Casts: Only a check, not a conversion/coercsion
+References & mutation: Hard concept that is important
+Collections: Lists, maps, sets
+Abstract classes: not too important
+Find something is the library
+Exceptions: Important because you *have* to deal with them in the Java API
+JUnit: Not important; 6.005 talks about it

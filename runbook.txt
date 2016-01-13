@@ -1,0 +1,237 @@
+= 6.092 Run Book
+Evan Jones <evanj@mit.edu>
+$Id$
+
+A http://en.wikipedia.org/wiki/Runbook[run book] is documentation for
+performing a specific task. It is provided so when one person leaves, other
+people can take over their tasks. In this case, this documentation exists so
+that 6.092: Introduction to Java can be taught by others, and those future
+instructors can benefit from previous experience.
+
+IMPORTANT: Update this document when you discover something that is incorrect
+or does not work well. Only you can make life easier for your future
+replacements.
+
+////
+NOTE: This is an AsciiDoc document. It can be converted to HTML using:
+asciidoc runbook.txt
+
+http://www.methods.co.nz/asciidoc/
+
+Helpful quick reference: http://powerman.name/doc/asciidoc
+////
+
+
+== Repository
+
+All the course materials are stored in the subversion repository, stored in a
+http://tig.csail.mit.edu/twiki/bin/view/TIG/AFSProjectDirectory[CSAIL AFS
+Project Directory]. It uses
+http://tig.csail.mit.edu/twiki/bin/view/TIG/AFSProtectionGroups[AFS
+protection groups] to determine who has access.
+
+=== Quick Reference
+
+* Check out the Subversion repository: +svn co
+svn+ssh://login.csail.mit.edu/afs/csail/proj/courses/iap/6.092/repository/trunk
+6.092+
+* View the documentation: +make; open runbook.html+
+* Give a user access to the repository: +pts adduser -user _username_ -group
+6.092+
+* Revoking a user's access: +pts removeuser -user _username_ -group 6.092+
+
+=== Documentation
+
+The documentation in the repository are in AsciiDoc format. To convert them to
+HTML, run +make+. To create a new document, create +document.txt+ and add
++document.html+ to the end of the +OUTPUTS+ line in +Makefile+.
+
+=== Web Site
+
+Since we are using Stellar, the course web site at
+http://courses.csail.mit.edu/iap/6.092/[http://courses.csail.mit.edu/iap/6.092/]
+redirects to the Stellar site. This is implemented by the file:
++/afs/csail/proj/courses/iap/6.092/www/data/.htaccess+
+
+=== Subversion Change Notifications
+
+NOTE: This is currently disabled. Uncomment last line in +tools/svn/real-post-commit.sh+ to enable.
+
+When changes are committed, the diff is emailed to all members of the 6.092
+AFS protection group. This magic is implemented by the scripts in +tools/svn+,
+and the repository's
+http://svnbook.red-bean.com/nightly/en/svn.ref.reposhooks.post-commit.html[post-commit
+hook].
+
+=== Athena Course Locker
+
+Previously, the +iapjava+
+http://web.mit.edu/accounts/www/LockerGuide.html[Athena Course Locker] was
+used for the course. This places the web site at
+http://web.mit.edu/iapjava/[http://web.mit.edu/iapjava/]. It also provides a
+mailing list, mailto:iapjava-staff@mit.edu[iapjava-staff@mit.edu] that sends
+email to all the staff. Currently, the course locker redirects to the Stellar
+site, thanks to the configuration in +/mit/iapjava/.htaccess.mit+. It may be
+useful to either dispose of this Athena locker and convert to using Stellar
+and CSAIL's resources, or alternately switch to using the locker.
+
+* Add/remove users to/from the iapjava group use
+http://web.mit.edu/moira/[Web Moira]. Add users to the tbp-java-request group.
+All users will then also be group administrators, which means they can
+add/remove users from the group.
+
+
+== Administering the Course
+
+=== Staff
+
+We have used the guideline that we need one staff member for every 20
+students. This course involves significant hands on work during the class
+times, so this is approximately the right number of staff members to provide
+prompt help, without too much idle time. For each section, at least one of
+these should be a graduate student with teaching experience. The others could
+be advanced undergraduate lab assistants. These are paid positions, even for
+foreign students on F-1 or J-1 visas.
+
+To find sufficient staff, send email to
+https://lists.csail.mit.edu/mailman/listinfo/csail-related[csail-related].
+You can also get the EECS graduate office to send out a call for
+staff (Janet Fischer is currently the person to contact). Since the exact
+number of students is unpredictable, be clear that you cannot guarantee that
+they will be needed. However, line up the staff you want *early*, so they can
+plan to be present during IAP.
+
+=== IAP Catalog Listing and Reserving Rooms
+
+At the beginning of October, contact the person in the EECS undergraduate
+office who is responsible for IAP to add the course to the official list of
+offerings. This has been Anne Hunter in the past. The course description we
+used in previous years is:
+
+=============
+An introduction to software engineering, using the Java programming language.
+Covers concepts useful to 6.005. The focus is on developing high quality,
+working software that solves real problems. Students will learn the
+fundamentals of Java. The class is designed for students with some
+programming experience, but if you have none and are motivated you will do
+fine. Students who have taken 6.005 should not take this course. Each class is
+composed of one hour of lecture and one hour of assisted lab work. 
+
+Bring charged laptops with Java to class.
+=============
+
+Reserve appropriate room(s). The best rooms are
+http://student.mit.edu/cgi-bin/display_pictures.sh?32-155[32-155]
+http://www.csail.mit.edu/resources/maps/1/155.gif[(map)] and
+http://student.mit.edu/cgi-bin/display_pictures.sh?32-141[32-141]
+http://www.csail.mit.edu/resources/maps/1/141.gif[(map)], each which hold
+90 students. We have had anywhere from 150 - 200 students preregister, of which
+~75% typically submit the first assignment. Ideally, get 32-123 for the first 2 lectures,
+then switch to a smaller room for the rest. If these rooms are unavailable, look for
+other rooms with a projector and with real tables so students can comfortably
+work on their laptops. You can change the room number in the URLs above to see
+photos and capacities of all rooms.
+
+IMPORTANT: Verify the room capacity of the rooms that you are assigned.
+Frequently the room assignment people don't believe us when we tell them we
+need a big room, and they give us a small room. Don't let them do this.
+
+In the past, we have run the class on Tuesday and Thursdays,
+noon - 2 PM, and on Mon/Wed/Fri 1 - 3 PM. Do not reserve rooms from 5 - 7 PM.
+This interferes with varsity sports. This is technically permitted, since the
+policy only forbids academic activities at this time during the fall and
+spring semesters (see
+http://web.mit.edu/faculty/governance/rules/2.10.html[Rules and Regulations
+2.12]). However, people will be annoyed with you.
+
+2009: 150 preregister.
+2010: 125 preregister. 102 first assignment.
+2011: 200 preregister. XXX first assignment.
+
+.Useful Links
+
+* http://student.mit.edu/roominv/roominv.cgi[MIT Schedules Office
+Classroom List]
+* http://web.mit.edu/faculty/governance/rules/index.html[MIT Rules and
+Regulations]
+
+=== Reserving Spare Laptops
+
+In 2008, we were able to borrow 10 laptops via the
+http://web.mit.edu/lcp/[IS&T Laptop Loaner Program]. These were given out
+to students who do not have their own laptops. Approximately 6 out of 60
+students used them. In 2009, these laptops were not available. It would be an
+excellent idea to attempt to obtain these laptops ASAP.
+
+=== Lottery
+
+If you are unable to obtain sufficient staff and/or space to accommodate ~150
+students, you will need to run a lottery. This is a huge pain. Tips from
+previous years:
+
+* Make it clear in the course description that there will be a lottery.
+* Cook up your own web script or use Google Spreadsheets to accept students in
+the lottery, *and* have them pre-register via WebSIS. WebSIS will add the
+student to Stellar and to the grade sheet, but the registrar's
+office provides no information about *when* students preregistered, so doing
+it yourself lets you accept students in a "first come, first served" fashion.
+* Email students promptly about the results of the lottery so they can adjust
+their plans over IAP.
+* Reserve some "extra" space for students with good stories about why they
+should be in the class. It sucks when someone bought their plane tickets to
+take a particular class, to not have space for them.
+* Count on \~10% of the students dropping before the course starts. Count on
+another ~10% dropping after the first lecture.
+
+=== Stellar
+
+In 2009 and 2010, we used Stellar for the course web site. This was
+convenient, since it permits students to submit assignments electronically,
+without the pain of dealing with email submission, or having to cook up our
+own scripts. http://stellar.mit.edu/SR/[Request the Stellar web site] and it will be
+activated in a few days. You should be able to import our previous Stellar
+configuration.
+
+In order to make this repository self contained, the original version of all
+documentation is stored here, in AsciiDoc format. To keep the repository up
+to date, be sure to update this version, then upload the updated version to
+Stellar, rather than editing the Stellar version.
+
+
+=== Grading
+
+There might be a better way, but I grade the assignments as follows:
+
+. Download all the assignments by clicking "download all submissions" on the homework page.
+. Unzip this into a temporary directory.
+. Open the Gradebook page for the assignment, creating it if needed. Each assignment is worth 1 point.
+. For each student, hold your mouse over their name. Their email address is in the tooltip or the URL
+. Open the file with the same name as their email address. Grade this.
+. Type 1 in the points box if they get credit.
+. If you notice something not quite right, leave a comment for the student: switch to the tab with the homework page, find the student, and open their page in a new tab. Comment and close the tab.
+. Periodically click the Save Changes button so you don't lose everything with a crash or accidentally closing the tab.
+. Skip over students who did not submit the assignment.
+. Finally, click the Approve All and Save Changes buttons to publish the grade.
+
+Some of the students will submit different file formats. The file command is invaluable for figuring this out. If they submit a .class file, the file command reports "binary data," but the first four bytes of the file will be \xCA\xFE\xBA\xBE.
+
+Finally, make note of frequent mistakes to cover in the next lecture, and possibly to fix for next year in the todo.txt file.
+
+
+=== Before the First Lecture
+
+It is important that students attempt to install Java and Eclipse on their
+computers before the first class, because otherwise it sucks up a ton of time.
+Check the directions to ensure all the links still work, and that the versions
+have been updated as appropriate.
+
+* Put the Windows JDK installer, Windows Eclipse, and Mac OS X Eclipse
+downloads on a USB key. Many students will have trouble following the
+directions, so this saves the time of waiting for downloads to complete during
+the course.
+
+* Make sure the file:installjava.html[directions] are uploaded as "materials"
+on Stellar. Make sure they are linked from the front page.
+
+* Email the entire class a few days before, reminding them to bring laptops
+with Eclipse installed.

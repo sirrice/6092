@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+  PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN'
+  'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>6.092: Assignment 7</title>
+<style type="text/css">
+h1, h2 {
+    font-family: helvetica, arial, sans-serif;
+}
+</style>
+</head>
+<body>
+
+<h1>6.092: Assignment 7: Magic Squares!</h1>
+
+<p>A magic square of order <i>n</i> is an arrangement of <i>n</i> × <i>n</i> numbers, usually distinct integers, in a square, such that the <i>n</i> numbers in all rows, all columns, and both diagonals sum to the same constant (see Wikipedia: <a href="http://en.wikipedia.org/wiki/Magic_square">Magic Square</a>).</p>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Magicsquareexample.svg/180px-Magicsquareexample.svg.png" alt="A magic square" /></p>
+
+<h2>Checking the row values</h2>
+
+<p>We give you two text files: <a href="../2/Mercury.txt">Mercury.txt</a> and <a href="../3/Luna.txt">Luna.txt</a></p>
+
+<p>For each file: open the file, and check that all rows indeed sum to the same constant.</p>
+
+<h2>Hints</h2>
+
+<p>Copy both text files to the root directory of your project. This is the directory that contains the <tt>src</tt> folder. Alternative: Use absolute paths to the files (<code>c:\somedir\Mercury.txt</code> on Windows or <code>/Users/myuser/Mercury.txt</code> on Mac)</p>
+
+<p>You will need to handle or rethrow <code>IOException</code></p>
+
+<p>Read the files line by line as explained during the lecture today.</p>
+
+<p>Use <tt> ... = myLine.split("\t"); </tt> to break apart each line at the tab character, producing an array of String (String[]), each containing one value. Consult the Java API reference for <a href="http://java.sun.com/javase/6/docs/api/java/lang/String.html#split(java.lang.String)">String.split</a>).</p>
+	
+<p>Finally, use <tt> ... = Integer.valueOf(substring); </tt> to transform each string value into an integer value.</p>
+
+<h2>Optional Part: Column / Diagonal Values</h2>
+
+<p>Optionally, try to check that the columns and the diagonal also sum to the same constant. This is slightly trickier!</p>
+
+<h2>Submission Instructions</h2>
+
+<p>Submit your <tt>MagicSquares.java</tt> file via Stellar.</p>
+
+</body></html>

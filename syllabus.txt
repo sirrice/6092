@@ -1,0 +1,61 @@
+= 6.092: Introduction to Java Syllabus
+Evan Jones <evanj@mit.edu>
+$Id$
+
+This short course is an introduction to Java programming and software
+engineering. It is designed for students with no programming experience, or
+with some programming experience but no experience with Java. By the end of
+the class, students will understand the fundamentals of the Java language, and
+have experience writing and debugging simple programs. There are eight
+classes. Each session includes one hour of lecture and one hour of assisted
+lab work. During the second hour of the class, instructors are available to
+help complete the assignments.
+
+
+== Assignments
+
+Assignments are _mandatory_, as the only way to learn how to write computer
+programs is to write programs. You must submit seven of the eight assignments
+to get a passing credit. The submitted assignments do not need to work, but
+they do need to show that you made an honest effort to get your program
+working. Assignments are due the day following the lecture.
+
+
+== Collaboration
+
+Please discuss the assignments with your friends, and get help from them if
+you get stuck. However, you must write your own program for the assignments.
+Again, this is because you need to actually write programs yourself in order
+to learn how to program.
+
+
+== Course Content
+
+The lectures roughly follow http://openbookproject.net/thinkcs/java.php[How to
+Think Like a Computer Scientist], a free textbook. I don't know if it is the
+best textbook, but it is free. If you are looking for help with a topic, this
+is a good place to look
+(http://www.openbookproject.net/thinkcs/java/english/[older HTML version] |
+http://openbookproject.net/thinkcs/java/english/dist_v4.0/thinkapjava.pdf[PDF]).
+
+=== Lecture Topics
+
+. Variables, Types, Operators
+. Methods and Conditionals
+. Loops and Arrays
+. Objects and Classes
+. Classes and Inheritance
+. Inheritance, Abstraction, Design
+. Java API, Packages, Collections
+. Exceptions and I/O
+
+
+== Additional Resources
+
+Two other free online textbooks are
+http://math.hws.edu/javanotes/[Introduction to Programming Using Java] and
+http://www.mindview.net/Books/TIJ/[Thinking in Java].
+http://www.leepoint.net/JavaBasics/index.html[Java Basics] is a good, brief
+tutorial. Its companion,
+http://www.leepoint.net/notes-java/index.html[Java Notes], is a useful
+reference on specific topics.

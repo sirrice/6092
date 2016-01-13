@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+<title>6.092: Assignment 3</title>
+<style type="text/css">
+h1, h2, h3 {
+    font-family: helvetica, arial, sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th {
+    border-bottom: solid thin black;
+}
+
+td, th {
+    padding-right: 1em;
+}
+
+// Styles for code snippet
+.S0 {
+	color: #808080;
+}
+.S2 {
+	font-family: serif;
+	color: #007F00;
+	font-size: 11pt;
+}
+.S4 {
+	color: #007F7F;
+}
+.S5 {
+	font-weight: bold;
+	color: #00007F;
+}
+.S6 {
+	color: #7F007F;
+}
+.S10 {
+	font-weight: bold;
+	color: #000000;
+}
+.code {
+	font-family: sans-serif;
+	color: #000000;
+	font-size: 11pt;
+}
+</style>
+</head><body id="home">
+
+<h1>6.092: Assignment 3</h1>
+
+<p>A group of MIT friends decide to run the Boston Marathon. Their names and times (in minutes) are below:</p>
+
+<table>
+<tr><th>Name</th><th>Time (minutes)</th></tr>
+<tr><td>Elena</td><td align="right">341</td></tr>
+<tr><td>Thomas</td><td align="right">273</td></tr>
+<tr><td>Hamilton</td><td align="right">278</td></tr>
+<tr><td>Suzie</td><td align="right">329</td></tr>
+<tr><td>Phil</td><td align="right">445</td></tr>
+<tr><td>Matt</td><td align="right">402</td></tr>
+<tr><td>Alex</td><td align="right">388</td></tr>
+<tr><td>Emma</td><td align="right">275</td></tr>
+<tr><td>John</td><td align="right">243</td></tr>
+<tr><td>James</td><td align="right">334</td></tr>
+<tr><td>Jane</td><td align="right">412</td></tr>
+<tr><td>Emily</td><td align="right">393</td></tr>
+<tr><td>Daniel</td><td align="right">299</td></tr>
+<tr><td>Neda</td><td align="right">343</td></tr>
+<tr><td>Aaron</td><td align="right">317</td></tr>
+<tr><td>Kate</td><td align="right">265</td></tr>
+</table>
+
+<h2>Problem</h2>
+<p>Find the fastest runner.  Print the name and his/her time (in minutes).</p>
+<p><em>Optional</em>: Find the second fastest runner. Print the name and his/her time (in minutes).</p>
+
+<h2>Directions</h2>
+
+<p>Write a method that takes as input an array of integers and returns the index corresponding to the person with the lowest time. Run this method on the array of times. Print out the name and time corresponding to the returned index.</p>
+
+<p><strong>Optional:</strong> Write a second method to find the second-best runner. The second method should use the first method to determine the best runner, and then loop through all values to find the second-best (second lowest) time.</p>
+
+<p>Here is a program skeleton to get started:</p>
+
+<p class="code">
+<span class="S5">class</span><span class="S0"> </span>Marathon<span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">public</span><span class="S0"> </span><span class="S5">static</span><span class="S0"> </span><span class="S5">void</span><span class="S0"> </span>main<span class="S0"> </span><span class="S10">(</span>String<span class="S10">[]</span><span class="S0"> </span>arguments<span class="S10">)</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>String<span class="S10">[]</span><span class="S0"> </span>names<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S6">"Elena"</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"Thomas"</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"Hamilton"</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"Suzie"</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"Phil"</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"Matt"</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"Alex"</span><span class="S10">,</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S6">"Emma"</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"John"</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"James"</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"Jane"</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"Emily"</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"Daniel"</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"Neda"</span><span class="S10">,</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S6">"Aaron"</span><span class="S10">,</span><span class="S0"> </span><span class="S6">"Kate"</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">};</span><br />
+<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">int</span><span class="S10">[]</span><span class="S0"> </span>times<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">341</span><span class="S10">,</span><span class="S0"> </span><span class="S4">273</span><span class="S10">,</span><span class="S0"> </span><span class="S4">278</span><span class="S10">,</span><span class="S0"> </span><span class="S4">329</span><span class="S10">,</span><span class="S0"> </span><span class="S4">445</span><span class="S10">,</span><span class="S0"> </span><span class="S4">402</span><span class="S10">,</span><span class="S0"> </span><span class="S4">388</span><span class="S10">,</span><span class="S0"> </span><span class="S4">275</span><span class="S10">,</span><span class="S0"> </span><span class="S4">243</span><span class="S10">,</span><span class="S0"> </span><span class="S4">334</span><span class="S10">,</span><span class="S0"> </span><span class="S4">412</span><span class="S10">,</span><span class="S0"> </span><span class="S4">393</span><span class="S10">,</span><span class="S0"> </span><span class="S4">299</span><span class="S10">,</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">343</span><span class="S10">,</span><span class="S0"> </span><span class="S4">317</span><span class="S10">,</span><span class="S0"> </span><span class="S4">265</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">};</span><br />
+<br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">for</span><span class="S0"> </span><span class="S10">(</span><span class="S5">int</span><span class="S0"> </span>i<span class="S0"> </span><span class="S10">=</span><span class="S0"> </span><span class="S4">0</span><span class="S10">;</span><span class="S0"> </span>i<span class="S0"> </span><span class="S10">&lt;</span><span class="S0"> </span>names<span class="S10">.</span>length<span class="S10">;</span><span class="S0"> </span>i<span class="S10">++)</span><span class="S0"> </span><span class="S10">{</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>System<span class="S10">.</span>out<span class="S10">.</span>println<span class="S10">(</span>names<span class="S10">[</span>i<span class="S10">]</span><span class="S0"> </span><span class="S10">+</span><span class="S0"> </span><span class="S6">": "</span><span class="S0"> </span><span class="S10">+</span><span class="S0"> </span>times<span class="S10">[</span>i<span class="S10">]);</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><br />
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S10">}</span><br />
+<span class="S10">}</span>
+</p>
+
+<h2>Submission Instructions</h2>
+
+<p>
+Submit your file <code>Marathon.java</code> via Stellar.
+</p>
+
+<p>Good luck!</p>
+
+</body></html>
